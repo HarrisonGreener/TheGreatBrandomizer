@@ -1060,8 +1060,9 @@ card.visible=false;card.castShadow=true;machine.add(card);card.userData.card=tru
 let cardAnim=null,lastCard=null;
 const CARD_LEAN=0.5, CARD_H=0.098, TRAY_FLOOR=TRAY.y+0.006;
 const CARD_REST={y:TRAY_FLOOR+CARD_H/2*Math.cos(CARD_LEAN)+0.003, z:0.318+CARD_H*Math.sin(CARD_LEAN)+0.004-CARD_H/2*Math.sin(CARD_LEAN)};
-function drawCard(res){
-  const x=cardArt.ctx,w=900,h=520;
+function drawCard(res){drawCardOn(cardArt.ctx,res);cardArt.t.needsUpdate=true;}
+function drawCardOn(x,res){
+  const w=900,h=520;
   x.fillStyle="#f2e7cf";x.fillRect(0,0,w,h);
   for(let i=0;i<4000;i++){x.fillStyle=`rgba(90,60,30,${Math.random()*0.05})`;x.fillRect(Math.random()*w,Math.random()*h,1.5,1.5);}
   x.fillStyle="#b4231c";x.fillRect(0,0,w,54);
@@ -1079,7 +1080,31 @@ function drawCard(res){
   x.fillStyle="#f2e7cf";for(let i=0;i<30;i++){x.beginPath();x.arc(15+i*30,h,7,0,7);x.fill();}
   x.fillStyle="#d9c9a6";for(let i=0;i<30;i++){x.beginPath();x.arc(15+i*30,h-1,4,0,7);x.fill();}
   if(res.jackpot){x.save();x.translate(720,150);x.rotate(-0.2);x.strokeStyle="#b4231c";x.lineWidth=6;rrect(x,-130,-40,260,80,10);x.stroke();x.fillStyle="#b4231c";x.font='34px "Bungee", sans-serif';x.textAlign="center";x.textBaseline="middle";x.fillText("HOUSE PICK",0,2);x.restore();}
-  cardArt.t.needsUpdate=true;
+}
+/* Export the brand card as a PNG or JPEG at 2x resolution */
+function cardBlob(res,type){
+  const c=document.createElement('canvas');c.width=1800;c.height=1040;const x=c.getContext('2d');
+  x.scale(2,2);drawCardOn(x,res);
+  return new Promise(r=>c.toBlob(r,type,0.92));
+}
+let dlCap;
+function downloadsCap(){
+  if(dlCap===undefined)dlCap=window.claude?.use?Promise.race([window.claude.use('downloads'),new Promise(r=>setTimeout(()=>r(null),3000))]).catch(()=>null):Promise.resolve(null);
+  return dlCap;
+}
+async function saveCard(res,ext){
+  const type=ext==='png'?'image/png':'image/jpeg';
+  const slug=(res.name||'brand').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-'+res.theme.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  const filename=`brandomizer-${slug}.${ext}`;
+  const blob=await cardBlob(res,type);if(!blob){flash('Could not make the image');return;}
+  const dl=await downloadsCap();
+  if(dl){
+    try{await dl.save({filename,data:blob});flash('Saved '+filename);sfx.copy();}
+    catch(e){flash(e&&e.code==='declined'?'Download cancelled':'Downloads are not available here');}
+    return;
+  }
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);flash('Downloaded '+filename);sfx.copy();
 }
 let serial=Math.floor(rnd(1000,9000));
 function currentResult(){
@@ -1244,7 +1269,7 @@ function openPayout(res){
       <div class="type">
         <div><div class="lbl">Headline</div><div class="hs" style="font-family:'${esc(res.head)}',serif">${esc(res.name)}</div><div class="fn">${esc(res.head)} · <a href="https://fonts.google.com/specimen/${res.head.replace(/ /g,"+")}" target="_blank" rel="noopener">Specimen</a></div></div>
         <div><div class="lbl">Body</div><div class="bs" style="font-family:'${esc(res.body)}',sans-serif">${esc(THEMES.find(t=>t.name===res.theme)?.tag||"")} The reels picked these, and the contrast is checked below.</div><div class="fn">${esc(res.body)} · <a href="https://fonts.google.com/specimen/${res.body.replace(/ /g,"+")}" target="_blank" rel="noopener">Specimen</a></div></div>
-        <div class="actions"><button class="primary" id="saveSpin">Save this spin</button><button class="ghost" id="copyCss">Copy CSS variables</button><button class="ghost" id="copyFonts">Copy font embed</button></div>
+        <div class="actions"><button class="primary" id="saveSpin">Save this spin</button><button class="ghost" id="copyCss">Copy CSS variables</button><button class="ghost" id="copyFonts">Copy font embed</button><button class="ghost" id="dlPng">Download PNG</button><button class="ghost" id="dlJpg">Download JPEG</button></div>
         <span class="psub" id="flash" aria-live="polite"></span>
       </div>
     </div>
@@ -1263,6 +1288,8 @@ function openPayout(res){
   if(res){
     document.getElementById("saveSpin").onclick=()=>{state.favs.unshift({colors:res.colors,head:res.head,body:res.body,theme:res.theme,name:res.name,t:Date.now()});state.favs=state.favs.slice(0,30);store.set("brandomizer:favs",state.favs);sfx.button(true);openPayout(res);flash("Saved");};
     document.getElementById("copyCss").onclick=()=>copy(":root {\n"+res.colors.map((c,i)=>`  --brand-${i+1}: ${c};`).join("\n")+`\n  --font-headline: "${res.head}";\n  --font-body: "${res.body}";\n}`,"CSS variables copied");
+    document.getElementById("dlPng").onclick=()=>saveCard(res,"png");
+    document.getElementById("dlJpg").onclick=()=>saveCard(res,"jpg");
     document.getElementById("copyFonts").onclick=()=>{const fam=[res.head,res.body].filter((v,i,a)=>a.indexOf(v)===i).map(f=>"family="+f.replace(/ /g,"+")).join("&");copy(`<link href="https://fonts.googleapis.com/css2?${fam}&display=swap" rel="stylesheet">`,"Font embed copied");};
   }
   sheet.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copy(b.dataset.copy,"Copied "+b.dataset.copy));

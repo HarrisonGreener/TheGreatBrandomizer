@@ -20,7 +20,7 @@ Built with [three.js](https://threejs.org/) as a single HTML page. There's no bu
 
 ![Two colour reels held](screenshots/reels-held.png)
 
-**Cash out.** CASH OUT prints a brand card into the tray. Click it for the full payout: hex, RGB and HSL values, the font pairing with specimen links, a contrast check of every colour pair, and buttons to copy the palette as CSS variables or copy the Google Fonts embed. Spins you save are kept in your browser.
+**Cash out.** CASH OUT prints a brand card into the tray. Click it for the full payout: hex, RGB and HSL values, the font pairing with specimen links, a contrast check of every colour pair, buttons to copy the palette as CSS variables or copy the Google Fonts embed, and Download PNG or JPEG to save the brand card as an image. Spins you save are kept in your browser.
 
 ![Brand card in the payout tray](screenshots/cash-out.png)
 
