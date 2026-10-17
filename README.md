@@ -2,9 +2,11 @@
 
 A 3D vintage fruit machine that spins up brand profiles. Pull the handle and the reels land on a theme-based colour palette and a Google Fonts headline and body pairing, all checked for WCAG contrast. Hold the reels you like, spin again, and cash out a printed brand card.
 
-![The Great Brandomizer fruit machine](screenshots/machine.png)
+### [▶ Play it in your browser](https://harrisongreener.github.io/TheGreatBrandomizer/)
 
-Built with [three.js](https://threejs.org/) as a single HTML page. There's no build step: open `index.html` in a browser, or serve the repo with GitHub Pages.
+[![The Great Brandomizer fruit machine](screenshots/machine.png)](https://harrisongreener.github.io/TheGreatBrandomizer/)
+
+Built with [three.js](https://threejs.org/) as a single HTML page. There's no build step: play it at the link above, or download `index.html` and open it in a browser.
 
 ## How it works
 
