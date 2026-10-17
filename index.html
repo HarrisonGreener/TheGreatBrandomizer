@@ -1301,7 +1301,10 @@ addEventListener("resize",onResize);
 async function init(){
   const msg=document.getElementById("loadMsg");
   msg.textContent="LOADING TYPE";
-  await Promise.race([Promise.all(["Bungee","Lobster","VT323","Barlow Condensed","Barlow"].map(f=>document.fonts.load(`40px "${f}"`))),new Promise(r=>setTimeout(r,4000))]);
+  const uiFonts=['40px "Bungee"','40px "Lobster"','40px "VT323"','500 40px "Barlow Condensed"','600 40px "Barlow Condensed"','700 40px "Barlow Condensed"','400 40px "Barlow"','500 40px "Barlow"','600 40px "Barlow"'];
+  await Promise.race([Promise.all(uiFonts.map(f=>document.fonts.load(f))),new Promise(r=>setTimeout(r,6000))]);
+  // if any face arrives late, repaint the painted panels so nothing stays in a fallback font
+  document.fonts.addEventListener("loadingdone",()=>{drawLowerFront();drawUpper();});
   await ensureTheme(theme());
   state.colors=genPalette(theme(),Array(state.n).fill(null));state.holds=state.colors.map(()=>false);
   state.head=readyHeads()[0];state.body=readyBodies()[0];
