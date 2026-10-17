@@ -1,4 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Brandomizer</title>
+<style>html,body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,16 +130,13 @@ kbd{font-family:var(--f-led);font-size:16px;background:#2a1915;border-radius:4px
 @media (max-width:560px){.fav{grid-template-columns:minmax(0,1fr) auto}.fstrip{grid-column:1/-1}}
 .empty{color:var(--muted);font-size:14px;margin:0}
 .note{font-size:13px;color:var(--muted);margin:10px 0 0}
+[hidden]{display:none!important}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (max-width:560px){ .hud-tl .sub{display:none} .field input{width:120px;font-size:21px} }
 </style>
 
 <div id="stage"></div>
 
-<div class="hud hud-tl">
-  <span class="wordmark">BRANDOMIZER</span>
-  <span class="sub">Prototype 2</span>
-</div>
 <div class="hud hud-bl">
   <div class="field">
     <label for="brandName">Name on the reels</label>
@@ -1313,3 +1318,6 @@ init().catch(err=>{console.error(err);document.getElementById("loadMsg").textCon
   // shown if the module above can't load (e.g. the 3D engine is blocked)
   setTimeout(()=>{const l=document.getElementById("loader");if(l&&!l.classList.contains("gone")){const m=document.getElementById("loadMsg");if(m&&m.textContent==="WARMING UP THE BULBS")m.textContent="STILL LOADING THE 3D ENGINE...";}},8000);
 </script>
+
+</body>
+</html>
