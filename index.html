@@ -470,10 +470,11 @@ function drawLowerFront(){
   const seam=(X,Y,w,h)=>{x.strokeStyle="rgba(0,0,0,.9)";x.lineWidth=5;x.strokeRect(X,Y,w,h);x.strokeStyle="rgba(255,240,220,.07)";x.lineWidth=2;x.strokeRect(X+4,Y+4,w-8,h-8);};
   seam(30,40,370,430);seam(420,40,450,430);seam(30,500,840,270);
   // inventory plate
-  x.fillStyle="#b9b3ad";rrect(x,70,90,250,70,6);x.fill();
-  x.fillStyle="#3a2d27";x.font='700 22px "Barlow Condensed", sans-serif';x.fillText("BRANDOMIZER CO.",88,120);
-  x.font='600 17px "Barlow Condensed", sans-serif';x.fillText("MODEL BR-01 · SERIAL 0002001",88,146);
-  x.fillStyle="rgba(0,0,0,.25)";for(const[a,b]of[[78,98],[310,98],[78,152],[310,152]]){x.beginPath();x.arc(a,b,3.5,0,7);x.fill();}
+  x.fillStyle="#b9b3ad";rrect(x,70,90,290,70,6);x.fill();
+  x.textAlign="left";x.textBaseline="alphabetic";x.fillStyle="#3a2d27";
+  fitText(x,"BRANDOMIZER CO.",250,22,'"Barlow Condensed", "Arial Narrow", sans-serif',"700");x.fillText("BRANDOMIZER CO.",90,120);
+  fitText(x,"MODEL BR-01 · SERIAL 0002001",250,17,'"Barlow Condensed", "Arial Narrow", sans-serif',"600");x.fillText("MODEL BR-01 · SERIAL 0002001",90,146);
+  x.fillStyle="rgba(0,0,0,.25)";for(const[a,b]of[[78,98],[350,98],[78,152],[350,152]]){x.beginPath();x.arc(a,b,3.5,0,7);x.fill();}
   // scuff on kick plate
   for(let i=0;i<40;i++){x.strokeStyle=`rgba(210,200,190,${Math.random()*.2})`;x.lineWidth=1;x.beginPath();const sx=rnd(40,860),sy=rnd(700,790);x.moveTo(sx,sy);x.lineTo(sx+rnd(-30,30),sy+rnd(-6,6));x.stroke();}
   lowerFront.t.needsUpdate=true;
