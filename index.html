@@ -1057,6 +1057,8 @@ const cardArt=canvasTex(900,520);
 const card=new THREE.Mesh(new THREE.PlaneGeometry(0.17,0.098),new THREE.MeshStandardMaterial({map:cardArt.t,roughness:1,envMapIntensity:0,emissive:0xffffff,emissiveMap:cardArt.t,emissiveIntensity:0.15,side:THREE.DoubleSide}));
 card.visible=false;card.castShadow=true;machine.add(card);card.userData.card=true;clickables.push(card);
 let cardAnim=null,lastCard=null;
+const CARD_LEAN=0.5, CARD_H=0.098, TRAY_FLOOR=TRAY.y+0.006;
+const CARD_REST={y:TRAY_FLOOR+CARD_H/2*Math.cos(CARD_LEAN)+0.003, z:0.318+CARD_H*Math.sin(CARD_LEAN)+0.004-CARD_H/2*Math.sin(CARD_LEAN)};
 function drawCard(res){
   const x=cardArt.ctx,w=900,h=520;
   x.fillStyle="#f2e7cf";x.fillRect(0,0,w,h);
@@ -1095,8 +1097,9 @@ function updateCard(now){
   const t=(now-cardAnim.t0)/1000;
   const sx=TRAY.x,slotY=0.6;
   if(t<1.1){const k=t/1.1;card.position.set(sx,slotY-0.002,0.262+0.095*k);card.rotation.set(-Math.PI/2+0.06,0,0);}
-  else if(t<1.55){const k=(t-1.1)/0.45,e=k*k;card.position.set(sx,lerp(slotY-0.002,TRAY.y+0.03,e),lerp(0.357,TRAY.z+0.07,e));card.rotation.set(-Math.PI/2+lerp(0.06,1.0,k),0,lerp(0,0.05,k));}
-  else{const k=Math.min(1,(t-1.55)/0.25);card.position.set(sx,TRAY.y+0.03+0.006*Math.sin(k*Math.PI),TRAY.z+0.07);card.rotation.set(-Math.PI/2+1.0,0,0.05);
+  // rest pose: bottom edge on the tray floor, top edge leaning on the cabinet
+  else if(t<1.55){const k=(t-1.1)/0.45,e=k*k;card.position.set(sx,lerp(slotY-0.002,CARD_REST.y+0.02,e),lerp(0.357,CARD_REST.z,e));card.rotation.set(lerp(-Math.PI/2+0.06,-CARD_LEAN,k),0,lerp(0,0.04,k));}
+  else{const k=Math.min(1,(t-1.55)/0.25);card.position.set(sx,CARD_REST.y+0.02*(1-k)+0.004*Math.sin(k*Math.PI),CARD_REST.z);card.rotation.set(-CARD_LEAN,0,0.04);
     if(k>=1){cardAnim=null;sfx.stop();setLed("YOUR CARD IS IN THE TRAY");}}
 }
 // coins
