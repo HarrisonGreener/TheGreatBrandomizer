@@ -50,8 +50,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero h1{color:#ffe2a1;font-size:clamp(36px,6.4vw,68px);text-shadow:0 0 22px rgba(255,140,40,.35);margin:6px 0 14px}
 .hero .lede{color:#e9dcc4}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.btn-big{font-size:20px;padding:14px 34px;background:#ffd977;color:#3a1500;box-shadow:0 4px 0 #a8741c}
-.btn-big:hover{background:#fff3b0;color:#3a1500}
+.hero .btn-big{font-size:20px;padding:13px 36px;background:#ffd977;color:#3a1500;box-shadow:0 4px 0 #a8741c}
+.hero .btn-big:hover{background:#fff3b0;color:#3a1500}
 .hero .btn-ghost{color:#ffd977;box-shadow:inset 0 0 0 2px #ffd977}
 .hero .btn-ghost:hover{background:rgba(255,217,119,.1);color:#fff3b0}
 .hero-img{display:block;align-self:end;justify-self:center;max-width:390px;width:100%}
