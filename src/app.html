@@ -27,7 +27,7 @@ html,body{height:100%;background:var(--void)}
 body{color:var(--text);font-family:var(--f-body);font-size:15px;line-height:1.5;overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--amber-hot);outline-offset:3px}
-#stage{position:fixed;inset:0}
+#stage{position:fixed;inset:var(--hdr,0px) 0 0 0}
 #stage canvas{display:block;width:100%;height:100%;touch-action:none}
 
 .hud{position:fixed;z-index:5;display:flex;gap:10px;align-items:flex-end}
@@ -517,7 +517,8 @@ const isTouch=matchMedia("(pointer: coarse)").matches;
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
 renderer.setPixelRatio(Math.min(devicePixelRatio,isTouch?1.5:2));
-renderer.setSize(innerWidth,innerHeight);
+const SW=()=>stage.clientWidth||innerWidth, SH=()=>stage.clientHeight||innerHeight;
+renderer.setSize(SW(),SH());
 renderer.toneMapping=THREE.NoToneMapping;
 renderer.toneMappingExposure=0.92;
 renderer.shadowMap.enabled=true;
@@ -530,10 +531,10 @@ scene.fog=new THREE.Fog(0x050304,4.5,11);
 const pmrem=new THREE.PMREMGenerator(renderer);
 scene.environment=pmrem.fromScene(new RoomEnvironment(renderer),0.04).texture;
 
-const camera=new THREE.PerspectiveCamera(32,innerWidth/innerHeight,0.05,40);
+const camera=new THREE.PerspectiveCamera(32,SW()/SH(),0.05,40);
 const composer=new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene,camera));
-const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0.32,0.3,1.05);
+const bloom=new UnrealBloomPass(new THREE.Vector2(SW(),SH()),0.32,0.3,1.05);
 bloom.enabled=false;
 composer.addPass(new OutputPass());
 
@@ -1291,7 +1292,7 @@ const VIEWS={
 };
 function setView(v){view=v;resetCam();document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));}
 function frontView(){
-  const a=innerWidth/innerHeight;
+  const a=SW()/SH();
   const portrait=a<1;
   camera.fov=portrait?48:32;camera.aspect=a;camera.updateProjectionMatrix();
   const tv=Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
@@ -1478,7 +1479,7 @@ function loop(now){
   composer.render();
   requestAnimationFrame(loop);
 }
-function onResize(){renderer.setSize(innerWidth,innerHeight);composer.setSize(innerWidth,innerHeight);bloom.setSize(innerWidth,innerHeight);const fv=frontView();}
+function onResize(){renderer.setSize(SW(),SH());composer.setSize(SW(),SH());bloom.setSize(SW(),SH());const fv=frontView();}
 addEventListener("resize",onResize);
 
 async function init(){

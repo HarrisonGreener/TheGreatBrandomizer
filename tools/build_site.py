@@ -144,14 +144,18 @@ def head(path, title, desc, depth, extra_fonts=None, jsonld=None, og_type="websi
 {fonts}<link rel="stylesheet" href="{rel}site.css">
 {adsense_head()}{ld}</head>
 <body>
-<header class="bar">
+{header_html(rel)}"""
+
+
+def header_html(rel):
+    return f"""<header class="bar">
   <div class="wrap bar-in">
-    <a class="logo" href="{rel}">The Great <span>Brandomizer</span></a>
+    <a class="logo" href="{rel}"><span class="logo-the">The Great </span><span>Brandomizer</span></a>
     <nav class="nav" aria-label="Main">
       <a href="{rel}themes/">Themes</a>
       <a href="{rel}guides/">Guides</a>
-      <a href="{rel}about/">About</a>
-      <a class="nav-cta" href="{rel}">Play</a>
+      <a class="nav-about" href="{rel}about/">About</a>
+      <a class="nav-cta" href="{rel}spin/">Spin</a>
     </nav>
   </div>
 </header>
@@ -165,7 +169,7 @@ def foot(depth):
     <p class="foot-logo">The Great Brandomizer</p>
     <p>A free colour palette and font pairing generator for brand identities. Made by <a href="{AUTHOR_URL}" rel="author">{AUTHOR}</a>.</p>
     <nav class="foot-nav" aria-label="Footer">
-      <a href="{rel}">Play</a><a href="{rel}themes/">Themes</a><a href="{rel}guides/">Guides</a><a href="{rel}about/">About</a><a href="{rel}privacy/">Privacy</a>
+      <a href="{rel}">Home</a><a href="{rel}spin/">Spin</a><a href="{rel}themes/">Themes</a><a href="{rel}guides/">Guides</a><a href="{rel}about/">About</a><a href="{rel}privacy/">Privacy</a>
     </nav>
     <p class="small">Fonts are from Google Fonts. &copy; 2026 {AUTHOR}.</p>
   </div>
@@ -201,24 +205,39 @@ def write(path, text):
 
 
 # ---------------------------------------------------------------- pages
-def build_index(app, themes):
+# header styles for the machine page, which doesn't load site.css
+SPIN_HEADER_CSS = """<style>
+:root{--hdr:52px}
+html,body{margin:0}img{max-width:100%}
+.bar{position:fixed;top:0;left:0;right:0;z-index:30;height:calc(var(--hdr) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);
+  background:#b4231c;box-shadow:0 2px 0 #86160f;box-sizing:border-box}
+.bar .wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));height:var(--hdr)}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar .logo{font-family:"Bungee",Impact,system-ui,sans-serif;font-size:17px;color:#fff3d8;text-decoration:none;white-space:nowrap}
+.bar .logo span:last-child{color:#ffd977}
+.bar .nav{display:flex;align-items:center;gap:16px;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+.bar .nav a{color:#fff3d8;text-decoration:none}
+.bar .nav a:hover{color:#ffd977}
+.bar .nav .nav-cta{background:#ffd977;color:#3a1500;border-radius:5px;padding:4px 10px}
+.bar .nav a[aria-current]{color:#ffd977}
+.bar .nav .nav-cta[aria-current]{background:#fff3b0;color:#3a1500}
+.loader{top:var(--hdr)!important}
+@media (max-width:520px){.bar .logo-the,.bar .nav-about{display:none}.bar .nav{gap:12px;font-size:13px}}
+</style>
+"""
+
+
+def build_spin(app, themes):
+    path = "spin/"
     body = app
     body = re.sub(r"<title>.*?</title>\n", "", body, count=1)
     body = body.replace('<meta name="claude:viewport-fit-sides" content="cover">\n', "")
-    nav = ('<nav class="site-nav" aria-label="Site">'
-           '<a href="themes/">Themes</a><a href="guides/">Guides</a><a href="about/">About</a><a href="privacy/">Privacy</a></nav>')
-    body = body.replace("<!--SITE-NAV-->", nav)
-    title = "The Great Brandomizer: Colour Palette and Font Pairing Generator"
+    body = body.replace("  <!--SITE-NAV-->\n", "")
+    hdr = header_html("../").replace('class="nav-cta" href="../spin/"', 'class="nav-cta" href="../spin/" aria-current="page"')
+    title = "Spin the Brandomizer: Colour Palette and Font Pairing Generator"
     desc = (f"Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings "
             f"from {len(themes)} design themes. Hold what you like, check WCAG contrast and download your brand card. Free.")
-    ld = {
-        "@context": "https://schema.org", "@type": "WebApplication", "name": SITE_NAME, "url": SITE_URL + "/",
-        "description": desc, "applicationCategory": "DesignApplication", "operatingSystem": "Any (web browser)",
-        "browserRequirements": "Requires WebGL", "isAccessibleForFree": True,
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
-        "image": SITE_URL + "/og-image.png",
-        "creator": {"@type": "Person", "name": AUTHOR, "url": AUTHOR_URL},
-    }
+    ld = app_ld(desc)
     page = f"""<!doctype html>
 <html lang="en-GB">
 <head>
@@ -226,27 +245,86 @@ def build_index(app, themes):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<link rel="canonical" href="{SITE_URL}/">
-<meta name="theme-color" content="#060405">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="{SITE_URL}/{path}">
+<meta name="theme-color" content="#b4231c">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:site_name" content="{SITE_NAME}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
-<meta property="og:url" content="{SITE_URL}/">
+<meta property="og:url" content="{SITE_URL}/{path}">
 <meta property="og:image" content="{SITE_URL}/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 {adsense_head()}<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
-<style>html,body{{margin:0}}img{{max-width:100%}}</style>
-</head>
+{SPIN_HEADER_CSS}</head>
 <body>
-{body}
+{hdr}{body}
 </body>
 </html>
 """
+    write(path + "index.html", page)
+
+
+def app_ld(desc):
+    return {
+        "@context": "https://schema.org", "@type": "WebApplication", "name": SITE_NAME, "url": SITE_URL + "/spin/",
+        "description": desc, "applicationCategory": "DesignApplication", "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires WebGL", "isAccessibleForFree": True,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+        "image": SITE_URL + "/og-image.png",
+        "creator": {"@type": "Person", "name": AUTHOR, "url": AUTHOR_URL},
+    }
+
+
+def build_home(themes, cats, guides):
+    groups = ""
+    for c, _ in cats:
+        items = "".join(f'<li><a class="tlink" href="themes/{t["id"]}/">{swatch_strip(t["house"]["colors"])}<span>{esc(t["name"])}</span></a></li>'
+                        for t in themes if t["cat"] == c)
+        groups += f'<h3>{c}</h3><ul class="tgrid">{items}</ul>\n'
+    gl = "".join(f'<li><a class="glink" href="{g["path"]}"><span class="g-t">{esc(g["h1"])}</span><span class="g-d">{esc(g["description"])}</span></a></li>' for g in guides)
+    title = "The Great Brandomizer: Free Colour Palette and Font Pairing Generator"
+    desc = (f"Spin brand colour palettes and Google Fonts pairings on a 3D vintage fruit machine. {len(themes)} design themes, "
+            "from Bauhaus and Art Deco to Y2K and Acid Rave, with contrast checks and a downloadable brand card. Free.")
+    ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/", "description": desc},
+          app_ld(desc)]
+    page = head("", title, desc, 0, None, ld).replace(f'<link rel="canonical" href="{SITE_URL}/">',
+        f'<link rel="canonical" href="{SITE_URL}/">\n<script>if(/^#theme-[a-z0-9-]+$/.test(location.hash))location.replace("spin/"+location.hash);</script>') + f"""<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="kicker">Free colour palette and font pairing generator</p>
+      <h1>The Great Brandomizer</h1>
+      <p class="lede">Pick a design style, pull the handle of a vintage fruit machine, and spin a brand colour palette and Google Fonts pairing to match. Hold what you like, check the contrast, then cash out your brand card.</p>
+      <p class="hero-cta"><a class="btn btn-big" href="spin/">Spin</a> <a class="btn btn-ghost" href="themes/">Browse {len(themes)} themes</a></p>
+    </div>
+    <a class="hero-img" href="spin/" aria-label="Spin the Brandomizer"><img src="assets/hero-machine.png" width="390" height="470" alt="The Great Brandomizer fruit machine with colour reels, font reels and a chrome handle"></a>
+  </div>
+</section>
+<main class="wrap page">
+<section aria-labelledby="how">
+  <h2 id="how">How it works</h2>
+  <ol class="steps">
+    <li><strong>Pick a theme.</strong> Choose from {len(themes)} styles in the Themes menu or on the machine's chart.</li>
+    <li><strong>Pull the handle.</strong> Five to seven colour reels, a headline font and a body font spin and land.</li>
+    <li><strong>Hold what you like.</strong> Press HOLD under any reel to keep it, then spin again to change the rest.</li>
+    <li><strong>Cash out.</strong> Get a brand card with HEX codes, a contrast check, CSS variables, a font embed and a PNG download.</li>
+  </ol>
+  <p><a class="btn" href="spin/">Spin the Brandomizer</a></p>
+</section>
+<section aria-labelledby="styles">
+  <h2 id="styles">Start from a style</h2>
+  <p>Every theme has its own colour rules and its own set of Google Fonts. Open one to see its palette, fonts and tips, or spin straight from there.</p>
+  {groups}
+</section>
+{ad_unit()}<section aria-labelledby="g">
+  <h2 id="g">Guides</h2>
+  <ul class="glist">{gl}</ul>
+</section>
+</main>
+""" + foot(0)
     write("index.html", page)
 
 
@@ -305,7 +383,7 @@ def build_theme_pages(themes, cats, guides):
 <p class="kicker">{esc(t["cat"])} theme</p>
 <h1>{esc(name)} colour palette and fonts</h1>
 <p class="lede">{esc(g["intro"])}</p>
-<p><a class="btn" href="../../#theme-{t["id"]}">Spin the {esc(name)} reels</a></p>
+<p><a class="btn" href="../../spin/#theme-{t["id"]}">Spin the {esc(name)} reels</a></p>
 
 <section class="card" aria-labelledby="house">
   <div class="card-top"><span>Brandomizer house pick</span><span>{esc(name)}</span></div>
@@ -346,7 +424,7 @@ def build_theme_pages(themes, cats, guides):
 <section class="cta-band">
   <h2>Make your own {esc(name)} palette</h2>
   <p>Every spin gives you a new {esc(name)} palette and font pairing. Hold the colours you like, re-spin the rest, and cash out a brand card with all the codes.</p>
-  <p><a class="btn" href="../../#theme-{t["id"]}">Spin the {esc(name)} reels</a></p>
+  <p><a class="btn" href="../../spin/#theme-{t["id"]}">Spin the {esc(name)} reels</a></p>
 </section>
 
 {ad_unit()}
@@ -389,7 +467,7 @@ def build_themes_index(themes, cats):
 <p class="kicker">Themes</p>
 <h1>{len(themes)} design themes, each with its own palette and fonts</h1>
 <p class="lede">Every theme on the Brandomizer has its own colour rules and its own set of Google Fonts, so a spin always stays inside a look that works. Open a theme to see its house palette, HEX codes, font options and contrast check, or jump straight into the machine.</p>
-<p><a class="btn" href="../">Play the Brandomizer</a></p>
+<p><a class="btn" href="../spin/">Spin the Brandomizer</a></p>
 {ad_unit()}{sections}</main>
 """ + foot(1)
     write(path + "index.html", page)
@@ -494,14 +572,14 @@ def build_404():
 <p class="kicker">404</p>
 <h1>No jackpot here</h1>
 <p class="lede">That page doesn't exist. The reels are still spinning on the home page.</p>
-<p><a class="btn" href="{SITE_URL}/">Play the Brandomizer</a> <a class="btn btn-ghost" href="{SITE_URL}/themes/">Browse themes</a></p>
+<p><a class="btn" href="{SITE_URL}/spin/">Spin the Brandomizer</a> <a class="btn btn-ghost" href="{SITE_URL}/themes/">Browse themes</a></p>
 </main>
 """ + foot(0).replace('href="', f'href="{SITE_URL}/').replace(f'href="{SITE_URL}/https://', 'href="https://')
     write("404.html", page)
 
 
 def build_meta(themes, guides):
-    urls = ["", "themes/", "guides/", "about/", "privacy/"] + [f"themes/{t['id']}/" for t in themes] + [g["path"] for g in guides]
+    urls = ["", "spin/", "themes/", "guides/", "about/", "privacy/"] + [f"themes/{t['id']}/" for t in themes] + [g["path"] for g in guides]
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for u in urls:
         xml += f"  <url><loc>{SITE_URL}/{u}</loc><lastmod>{TODAY}</lastmod></url>\n"
@@ -520,10 +598,11 @@ def main():
     missing = [t["id"] for t in themes if t["id"] not in guides_copy]
     if missing:
         sys.exit("Missing guide copy for: " + ", ".join(missing))
-    build_index(app, themes)
+    build_spin(app, themes)
     build_theme_pages(themes, cats, guides_copy)
     build_themes_index(themes, cats)
     guides = build_content_pages()
+    build_home(themes, cats, guides)
     build_privacy()
     build_404()
     build_meta(themes, guides)

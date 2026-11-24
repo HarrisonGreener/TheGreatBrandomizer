@@ -31,13 +31,34 @@ a:hover{color:var(--red-dk)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--red)}
 .bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:12px}
 .logo{font-family:var(--f-sign);font-size:18px;color:#fff3d8;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
-.logo span{color:#ffd977}
+.logo span:last-child{color:#ffd977}
 .logo:hover{color:#fff}
 .nav{display:flex;align-items:center;gap:4px 18px;flex-wrap:wrap;font-family:var(--f-label);font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
 .nav a{color:#fff3d8;text-decoration:none}
 .nav a:hover{color:#ffd977}
 .nav .nav-cta{background:#ffd977;color:#3a1500;border-radius:5px;padding:4px 10px}
 .nav .nav-cta:hover{background:#fff3b0;color:#3a1500}
+
+.nav a[aria-current]{color:#ffd977}
+@media (max-width:420px){.logo-the{display:none}}
+
+/* landing hero: the machine's dark arcade floor */
+.hero{background:radial-gradient(ellipse 60% 80% at 75% 40%,#5a1a10,transparent 70%),#0b0605;color:#f3e7d6}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px;align-items:center;padding-block:44px 0}
+.hero-copy{padding-bottom:44px}
+.hero .kicker{color:#ff6a4a;margin-top:0}
+.hero h1{color:#ffe2a1;font-size:clamp(36px,6.4vw,68px);text-shadow:0 0 22px rgba(255,140,40,.35);margin:6px 0 14px}
+.hero .lede{color:#e9dcc4}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.btn-big{font-size:20px;padding:14px 34px;background:#ffd977;color:#3a1500;box-shadow:0 4px 0 #a8741c}
+.btn-big:hover{background:#fff3b0;color:#3a1500}
+.hero .btn-ghost{color:#ffd977;box-shadow:inset 0 0 0 2px #ffd977}
+.hero .btn-ghost:hover{background:rgba(255,217,119,.1);color:#fff3b0}
+.hero-img{display:block;align-self:end;justify-self:center;max-width:390px;width:100%}
+.hero-img img{display:block;width:100%;height:auto}
+.steps{max-width:68ch;padding-left:22px}
+.steps li{margin-bottom:8px}
+@media (max-width:760px){.hero-in{grid-template-columns:minmax(0,1fr);gap:0}.hero-copy{padding-bottom:20px}.hero-img{max-width:300px}}
 
 /* page */
 .page{padding-block:24px 64px;display:flex;flex-direction:column;gap:12px}

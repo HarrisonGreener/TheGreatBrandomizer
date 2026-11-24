@@ -2,9 +2,9 @@
 
 A 3D vintage fruit machine that spins up brand profiles. Pick one of 38 design themes, pull the handle, and the reels land on a colour palette and a Google Fonts headline and body pairing that suit the style, all checked for WCAG contrast. Hold the reels you like, spin again, and cash out a printed brand card.
 
-### [▶ Play it in your browser](https://harrisongreener.github.io/TheGreatBrandomizer/)
+### [▶ Spin it in your browser](https://harrisongreener.github.io/TheGreatBrandomizer/spin/)
 
-[![The Great Brandomizer fruit machine](screenshots/machine.png)](https://harrisongreener.github.io/TheGreatBrandomizer/)
+[![The Great Brandomizer fruit machine](screenshots/machine.png)](https://harrisongreener.github.io/TheGreatBrandomizer/spin/)
 
 Built with [three.js](https://threejs.org/). The machine is a single HTML page with no build step for players.
 
@@ -35,13 +35,13 @@ Built with [three.js](https://threejs.org/). The machine is a single HTML page w
 
 - Every palette includes at least one dark and one light colour, so there's always an accessible text pair.
 - A jackpot comes up about 1 in 40 spins (with no reels held). It lands on the theme's hand-picked house pick, with flashing bulbs and a bell.
-- Link straight to a theme with `#theme-<id>`, for example `#theme-bauhaus`.
+- Link straight to a theme with `spin/#theme-<id>`, for example `spin/#theme-bauhaus`.
 - Drag to look around, scroll or pinch to zoom, and right-drag to pan. The Machine, Reels and Tray buttons jump to set views.
 - Keyboard: Space spins, 1 to 7 hold colour reels, T changes theme, M opens the theme menu, C cashes out, V changes view.
 
 ## The website
 
-Alongside the machine, the site has a page for every theme (palette, HEX codes, font options, contrast check and tips), a themes index, three guides, an about page with FAQs and a privacy page. Every page has its own title, description, social image and structured data, and there's a sitemap.
+The site opens on a landing page, and the machine lives at `/spin/` with the same header as every other page. Alongside it, the site has a page for every theme (palette, HEX codes, font options, contrast check and tips), a themes index, three guides, an about page with FAQs and a privacy page. Every page has its own title, description, social image and structured data, and there's a sitemap.
 
 The pages are generated. To change anything, edit the sources and rebuild:
 
