@@ -85,7 +85,7 @@ kbd{font-family:var(--f-led);font-size:16px;background:#2a1915;border-radius:4px
 .tcard{display:flex;flex-direction:column;gap:8px;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);padding:12px;min-width:0}
 .tcard:hover{border-color:rgba(255,226,190,.4)}
 .tcard[aria-current="true"]{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
-.tcard .tn{font-size:24px;line-height:1.1;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tcard .tn{font-size:clamp(17px,1.6vw,22px);line-height:1.15;color:var(--text);overflow-wrap:anywhere;min-height:2.3em;display:flex;align-items:flex-end}
 .tcard .ts{display:flex;height:18px;border-radius:4px;overflow:hidden}
 .tcard .ts span{flex:1}
 .tcard .tt{font-size:12px;color:var(--muted);line-height:1.35}
