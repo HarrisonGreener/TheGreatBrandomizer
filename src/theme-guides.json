@@ -1,0 +1,177 @@
+{
+  "victorian": {
+    "intro": "Victorian graphic design grew out of the 19th-century print boom: woodtype posters, engraved labels and packaging that crammed every inch with ornament. Colour came from inks that were expensive and earthy, so palettes lean on oxblood, bottle green, tarnished gold and slate, printed on warm, slightly yellowed paper. Typefaces are high-contrast serifs and fat display faces with ball terminals and plenty of drama.",
+    "use": "Craft gin and whisky labels, barbers, tattoo studios, antique shops, heritage food brands and anything that wants to feel established for a hundred years.",
+    "tips": ["Let the paper colour do the work. Use the light parchment shade as your background rather than pure white, and keep the dark ink for text.", "Pair one theatrical display face with a quiet book serif. Two decorative faces fighting for attention is where Victorian designs tip into pastiche."]
+  },
+  "midcentury": {
+    "intro": "Mid-century modern covers roughly 1945 to 1965, when designers mixed post-war optimism with clean, organic shapes. Think boomerang patterns, starbursts, airline posters and record sleeves. The colours are warm but slightly muted: teal, mustard, burnt orange, olive and walnut brown, the shades of furniture and printed fabric from the period. Type is friendly and geometric, often set loose and playful.",
+    "use": "Coffee shops, furniture and interiors brands, record labels, cocktail bars, travel companies and podcasts with a retro feel.",
+    "tips": ["Muted is the point. If a colour looks too fresh, pull its saturation down a touch so it feels printed rather than on screen.", "Use the walnut or deep brown as text instead of black. It keeps the whole palette warm."]
+  },
+  "spaceage": {
+    "intro": "Space Age design came from the 1960s race to the moon, when chrome, white plastic and rocket-launch orange appeared on everything from radios to architecture. It looks to the future the way people imagined it back then: rounded rectangles, wide extended type, and clean, technical layouts with numbers and countdowns. The palette is cool silver and navy with bold signal orange and red.",
+    "use": "Tech hardware, festivals, sci-fi games, observatories, synth and electronic music, and launch campaigns that want a sense of occasion.",
+    "tips": ["Wide, extended typefaces carry this style. Give them generous letter-spacing and set them in capitals.", "Treat orange as a signal colour. One orange element on a navy or silver layout says more than several."]
+  },
+  "sixties": {
+    "intro": "The Sixties theme covers the loud, joyful end of the decade: flower power, mod fashion and gig posters. Colours are saturated and warm, with tangerine, hot pink, sunshine yellow and turquoise sitting right next to each other. Type is chunky, rounded and bubbly, the kind of lettering that looks hand-drawn even when it isn't.",
+    "use": "Fashion and vintage clothing, ice cream and sweets, festivals, beauty brands and anything aimed at fun rather than seriousness.",
+    "tips": ["Clashing is allowed here, but keep one calm colour, usually the cream or deep purple, as the base so the page can breathe.", "Set the headline big and let the body font stay simple and readable underneath it."]
+  },
+  "seventies": {
+    "intro": "Seventies design is warm, earthy and easy-going. It's the decade of burnt orange kitchens, mustard sofas, avocado bathrooms and chunky, soft-cornered lettering. The palette sits in the browns, oranges and olive greens, with a creamy off-white to lift it. Typography is heavy and rounded, with fat serifs and tight letter-spacing.",
+    "use": "Coffee, bakeries, vinyl and audio brands, plant shops, hospitality and lifestyle brands that want warmth and nostalgia.",
+    "tips": ["Stack colours in stripes. Three or four bands of orange, mustard and brown are an instant Seventies signal.", "Tight letter-spacing on bold display type is what gives it that period feel. Don't open it up too much."]
+  },
+  "eighties": {
+    "intro": "The Eighties theme leans into arcade cabinets, synth album covers and neon signage. Expect hot pink, electric cyan, ultraviolet and sunset orange on deep, almost black backgrounds. Type is chrome-flavoured, italic, outlined or pixel-based, built to look fast and bright.",
+    "use": "Gaming, esports, nightlife, retro events, energy drinks, synthwave music and anything that wants to feel loud and electric.",
+    "tips": ["Neon only glows on dark. Keep the background deep navy or violet and let the bright colours sit on top.", "Check contrast carefully. Pink on purple looks great but often fails for body text, so keep small copy in the lightest shade."]
+  },
+  "nineties": {
+    "intro": "The Nineties theme borrows from Memphis-style patterns, Saturday morning TV and early desktop publishing: squiggles, confetti shapes and slightly off-kilter layouts. The colours are bold but a little dusty, with teal, purple, mustard and bubblegum pink. Type is comic, marker-drawn or chunky, with personality over polish.",
+    "use": "Streetwear, snack and drinks brands, kids' products, event nights, podcasts and playful startups.",
+    "tips": ["Add one pattern made from simple shapes in your palette colours. It does a lot of the Nineties work for you.", "Keep body text in a clean font even when the headline is goofy. Comic fonts are hard to read in paragraphs."]
+  },
+  "y2k": {
+    "intro": "Y2K design is the turn-of-the-millennium look: translucent plastic, chrome bubbles, iridescent gradients and the feeling of logging on. Palettes mix icy lilac, cyber cyan, hot magenta and lime with soft silver. Type is wide, techy and futuristic, often letter-spaced to fill a line.",
+    "use": "Fashion, beauty, music artists, tech-flavoured lifestyle brands, Gen Z products and digital collectibles.",
+    "tips": ["Use the soft silver and lilac shades as large areas, then add cyan or magenta in small, shiny accents.", "Extended display type works best in short words. Keep long reading copy in the plainer body font."]
+  },
+  "artnouveau": {
+    "intro": "Art Nouveau ran from about 1890 to 1910 and took its forms from nature: vines, flowers, flowing hair and the famous whiplash curve. Posters from the period frame figures in ornamental borders and hand-drawn lettering. The palette is soft and organic, with sage, mustard gold, plum, teal and dusty rose on warm cream.",
+    "use": "Florists, perfumers, tea rooms, jewellery, wellness and spa brands, theatres and boutique wine labels.",
+    "tips": ["Use curved frames and borders in the gold or sage tone to hold the layout together.", "Choose one decorative serif for headings and keep the text face classical. The ornament should live in the shapes, not in every word."]
+  },
+  "deco": {
+    "intro": "Art Deco arrived in the 1920s and 1930s with sunbursts, stepped shapes, geometric symmetry and gold everywhere. It was the style of grand hotels, cinemas and ocean liners. The palette is black and gold with deep teal, oxblood and blush, and the type is tall, elegant and geometric, often with thin strokes and dramatic capitals.",
+    "use": "Cocktail bars, hotels, events and weddings, jewellery, cinemas and luxury packaging.",
+    "tips": ["Gold reads best on black or very dark teal. Use it for lines, frames and key words rather than large fills.", "Strong symmetry is part of the look. Centre your layout and repeat shapes on both sides."]
+  },
+  "bauhaus": {
+    "intro": "The Bauhaus was a German art school that ran from 1919 to 1933 and changed design for good. Its posters use circles, squares and triangles, strong diagonals and sans serif type with no decoration. The palette is primary red, yellow and blue with black, grey and a warm off-white. Everything serves a purpose, and that's the beauty of it.",
+    "use": "Architects, furniture makers, galleries, design studios, education and any brand that wants to look rational and confident.",
+    "tips": ["Build the layout from basic shapes in the primary colours, then let the type sit inside or across them.", "Geometric sans serifs are the right call. Avoid anything with flourishes."]
+  },
+  "constructivism": {
+    "intro": "Constructivism came out of 1920s Russia, where artists used design as propaganda for a new society. The posters are all diagonals, photomontage, bold red blocks and heavy condensed type that seems to shout. The palette is red, black and aged paper, sometimes with khaki or steel grey.",
+    "use": "Protest and campaign work, gyms, music posters, bold editorial covers and brands with a strong point of view.",
+    "tips": ["Tilt things. A layout set at 15 or 30 degrees instantly feels Constructivist.", "Condensed, all-caps headlines at large sizes give you that urgent, poster-on-the-wall voice."]
+  },
+  "destijl": {
+    "intro": "De Stijl was a Dutch movement founded in 1917, best known through Piet Mondrian. It reduced everything to horizontal and vertical lines, rectangles and the three primaries plus black, white and grey. The result is calm, balanced and instantly recognisable.",
+    "use": "Galleries, architecture and interiors, modern furniture, design-led products and creative studios.",
+    "tips": ["Use thick black lines to divide the page into rectangles, then fill only a few of them with colour.", "Keep the type geometric and square. Rounded or script fonts break the grid."]
+  },
+  "swiss": {
+    "intro": "Swiss Style, also called the International Typographic Style, came from 1950s Switzerland and is still the backbone of modern graphic design. It's built on strict grids, flush-left sans serif type, lots of white space and objective photography. The palette is mostly black, white and grey, with a single bold red.",
+    "use": "Corporate identities, transport and signage, architecture, museums, annual reports and tech products.",
+    "tips": ["Set up a grid first and put everything on it. The discipline is the style.", "Use red sparingly, for one key word or shape, so it has full impact."]
+  },
+  "popart": {
+    "intro": "Pop Art came from the 1950s and 1960s, when artists borrowed from comic books, adverts and packaging. It's loud and graphic, with Ben-Day dots, thick black outlines, speech bubbles and flat primary colour. The palette is red, yellow, cyan and pink on black and white.",
+    "use": "Food and drink, toys, comics, streetwear, events and campaigns that want to grab attention fast.",
+    "tips": ["Thick black outlines and a halftone dot pattern sell the look straight away.", "Comic-style headlines need space. Give them a speech bubble or a burst shape to sit in."]
+  },
+  "psychedelic": {
+    "intro": "Psychedelic design is the late-1960s gig poster: lettering that melts and bends to fill a shape, vibrating colour combinations and swirling patterns. Colours fight on purpose, with magenta next to orange and acid green next to violet. Type is decorative and often hard to read, which was part of the fun.",
+    "use": "Music festivals, gig posters, craft beer, vintage shops and anything that wants to feel bold and trippy.",
+    "tips": ["Put complementary colours side by side at similar brightness to get that vibrating effect, but keep body text on a calm background.", "Bend headline lettering to fit a shape, like a circle or a wave, for an authentic period feel."]
+  },
+  "brutalist": {
+    "intro": "Brutalist design takes its name from raw concrete architecture. On screen and in print it means exposed structure, default-looking type, heavy borders, harsh contrast and layouts that feel deliberately unpolished. The palette is black, white and grey with a single loud colour such as safety red, yellow or blue.",
+    "use": "Art collectives, fashion labels, independent magazines, developer tools, portfolios and brands that want to feel honest and unfiltered.",
+    "tips": ["Show the grid and the borders. Brutalism celebrates the structure instead of hiding it.", "Monospaced and grotesque fonts at large sizes do most of the heavy lifting."]
+  },
+  "punk": {
+    "intro": "Punk zines were made with scissors, glue sticks and a photocopier. The look is ransom-note lettering, torn paper, marker scrawl and high-contrast black and white, with fluorescent pink and yellow added for shock. Nothing lines up, and that's the point.",
+    "use": "Bands and gigs, skate brands, independent shops, activist campaigns, tattoo studios and zines.",
+    "tips": ["Mix one marker-style headline with a typewriter body font for an instant cut-and-paste feel.", "Rotate elements slightly and let them overlap, as if they were stuck down by hand."]
+  },
+  "modern": {
+    "intro": "The Modern theme is what most current tech and lifestyle brands look like: clean geometric sans serifs, cool off-white backgrounds, slate greys and one confident accent colour. It's calm, clear and easy to use, built to work across screens and print alike.",
+    "use": "Startups, apps, SaaS products, agencies, consultancies and any brand that wants to feel current and trustworthy.",
+    "tips": ["Pick one accent and use it for buttons and links only. The rest of the palette should stay quiet.", "Generous spacing is what makes this look premium. When in doubt, add more white space."]
+  },
+  "minimal": {
+    "intro": "Minimal design strips everything back to what's needed: a near-white background, a near-black for text, a few greys and one colour that does all the talking. Typography is simple and well spaced, and empty space is treated as part of the design rather than something to fill.",
+    "use": "Architecture, photography, skincare, fashion, product design and personal portfolios.",
+    "tips": ["Use the accent colour once per screen or page. Its rarity is what makes it powerful.", "Rely on size and weight for hierarchy instead of extra colours or decoration."]
+  },
+  "bold": {
+    "intro": "The Bold theme is all about impact: maximum contrast, pure primaries and heavy condensed headlines. It's the visual language of sports brands, sales campaigns and big billboards. Every colour is turned up and every headline is set to shout.",
+    "use": "Sportswear, fitness, campaigns, sales and promotions, events and challenger brands.",
+    "tips": ["Use full-bleed blocks of colour behind huge headlines rather than small accents.", "Condensed display faces let you fit big words in narrow spaces, which is exactly what this style needs."]
+  },
+  "luxury": {
+    "intro": "Luxury branding is quiet confidence. Deep navy, forest green or burgundy grounds are paired with gold, champagne and soft taupe. Type is refined and classical: high-contrast serifs, thin capitals and generous letter-spacing. Nothing shouts, because it doesn't need to.",
+    "use": "Jewellery, fashion houses, hotels, fine dining, property, perfume and premium spirits.",
+    "tips": ["Letter-space small capitals widely for labels and navigation. It's one of the quickest ways to look expensive.", "Keep gold for details like rules, logos and small type. Large areas of gold start to look cheap."]
+  },
+  "editorial": {
+    "intro": "Editorial design borrows from magazines and newspapers: elegant serif headlines, crisp sans serif or serif body text, clear hierarchy and a restrained palette of ink, newsprint and one strong colour such as a deep red or navy. It's built for reading and makes words look important.",
+    "use": "Publishers, journalism, blogs and newsletters, cultural institutions, bookshops and thought-leadership brands.",
+    "tips": ["Make the headline serif large and the body text comfortable to read, around 17 to 20 pixels on screen.", "Use the accent colour like a magazine would: for kickers, pull quotes and section labels."]
+  },
+  "tech": {
+    "intro": "The Tech theme is the look of developer tools and modern software: dark navy backgrounds, electric blue, cyan and violet accents, grotesque sans serifs and monospaced details. It feels precise, fast and a little bit futuristic without going full sci-fi.",
+    "use": "SaaS products, AI tools, developer platforms, fintech, data products and hackathons.",
+    "tips": ["Use a monospaced font for small details like labels, numbers and code. It instantly signals tech.", "Glow the accent colour slightly on dark backgrounds, but keep reading text a soft off-white rather than pure white."]
+  },
+  "nordic": {
+    "intro": "Nordic design is calm, natural and functional. It uses soft fjord blues, mist grey, birch and oat tones, moss green and a touch of clay. Type is clean, light and friendly, and layouts rely on plenty of space and natural light rather than decoration.",
+    "use": "Interiors, homeware, wellbeing, outdoor brands, sustainable products and cafes.",
+    "tips": ["Keep contrast gentle in large areas and save the darkest shade for text.", "Rounded, airy sans serifs suit this style better than sharp, tight ones."]
+  },
+  "japandi": {
+    "intro": "Japandi blends Japanese wabi-sabi with Scandinavian simplicity. It's warm minimalism: rice paper whites, oak and clay, sage, charcoal and indigo. Type is quiet and refined, often a delicate serif paired with a soft sans serif, with lots of breathing room around everything.",
+    "use": "Ceramics and homeware, tea and coffee, skincare, yoga and wellness, architecture and interiors.",
+    "tips": ["Use texture, like paper grain or linen, instead of extra colours to add depth.", "Leave more empty space than feels comfortable. Restraint is the whole idea."]
+  },
+  "organic": {
+    "intro": "The Organic theme takes its cues from nature: sage and moss greens, terracotta, sand, stone and sky. Type is soft and friendly, often a characterful serif with a rounded sans serif for body text. It feels handmade, grounded and good for you.",
+    "use": "Food and farm brands, plant shops, sustainable fashion, wellness, natural skincare and charities.",
+    "tips": ["Pair the palette with natural textures and hand-drawn marks to keep it from feeling corporate.", "Use the terracotta as your accent. It warms up the greens and draws the eye."]
+  },
+  "tropical": {
+    "intro": "The Tropical theme is fresh, juicy and sunny: palm green, coral, mango, turquoise sea and hibiscus pink on warm cream. Type is round, bouncy and fun, sometimes script, always cheerful. It's a holiday in a palette.",
+    "use": "Drinks and smoothies, beach bars, holidays and travel, summer festivals, swimwear and sun care.",
+    "tips": ["Use the deep green as your anchor for text and the bright fruit colours for shapes and highlights.", "Round, bubbly fonts suit this look. Keep sharp, serious type out of it."]
+  },
+  "kawaii": {
+    "intro": "Kawaii means cute in Japanese, and this style is soft, round and sweet: pastel pink, mint, lilac, butter yellow and baby blue, with a deep plum instead of black for text. Type is chubby and rounded, and layouts often include little characters and stickers.",
+    "use": "Stationery, toys, sweets and bubble tea, beauty, kids' apps and character-led brands.",
+    "tips": ["Pastels have very low contrast against white, so always put text in the dark plum rather than a pastel.", "Rounded fonts and rounded corners everywhere keep the look consistent."]
+  },
+  "grunge": {
+    "intro": "Grunge design is the 1990s alternative scene on paper: distressed type, photocopy texture, stamped and typewritten lettering and muddy, worn-in colours like olive, rust, oxblood and nicotine yellow. It's deliberately rough and rejects polish.",
+    "use": "Bands, skate and streetwear, tattoo studios, independent coffee and record shops, and gritty event posters.",
+    "tips": ["Add texture, like grain, scratches or photocopy noise, over the colours. Flat fills look too clean for grunge.", "Typewriter and stencil fonts give you authenticity without much effort."]
+  },
+  "vaporwave": {
+    "intro": "Vaporwave is an internet art style from the early 2010s that remixes 1980s and 1990s consumer culture: shopping malls, early 3D graphics, Roman busts, palm trees and Windows-era interfaces. The palette is pastel neon, with pink, teal, lavender and peach on deep indigo.",
+    "use": "Music, streetwear, online creators, events, merch and anything with an ironic retro edge.",
+    "tips": ["Use gradients between the pink, peach and teal shades for skies and backgrounds.", "Pixel and wide futuristic fonts both work. Add wide letter-spacing for the full aesthetic."]
+  },
+  "cyberpunk": {
+    "intro": "Cyberpunk is the neon-soaked future of films, games and comics: rain-slick city streets, glitchy screens and warning labels. The palette is near-black with acid yellow, cyan, magenta and alarm red. Type is angular, technical and often monospaced, like a heads-up display.",
+    "use": "Gaming, esports, electronic music, tech events, energy drinks and sci-fi projects.",
+    "tips": ["Put yellow and black stripes or warning labels in your graphics for an instant cyberpunk cue.", "Let one neon colour dominate each layout. Using all of them equally turns into noise."]
+  },
+  "risograph": {
+    "intro": "Risograph is a print technique that layers bright soy inks one colour at a time, so prints come out slightly misaligned with a grainy, hand-made texture. Designers love its fluorescent pink, bright blue, sunflower yellow and teal on warm paper.",
+    "use": "Zines, independent publishers, illustrators, gig posters, cafes and creative studios.",
+    "tips": ["Fake the misregistration by offsetting a second colour layer by a few pixels and setting it to multiply.", "Keep to two or three ink colours per design, as a real Riso print would."]
+  },
+  "gothic": {
+    "intro": "Gothic design draws on medieval manuscripts, cathedrals and Victorian horror. Blackletter type, candlelit darkness, deep oxblood, violet, emerald and bone-white set the mood. It's dramatic, romantic and a little bit sinister.",
+    "use": "Metal and dark music, tattoo studios, horror films and games, Halloween events, occult and witchy brands, and barbers.",
+    "tips": ["Blackletter is hard to read in long words. Use it for short headlines and names only.", "Bone-white text on near-black is your main reading pairing, with red and violet as accents."]
+  },
+  "western": {
+    "intro": "The Western theme is the wanted poster and the old frontier general store: slab serif woodtype, Tuscan letters with split serifs, sun-bleached paper, rust, saddle tan, denim blue and turquoise. It feels sturdy, handmade and full of character.",
+    "use": "BBQ joints, whiskey and bourbon, denim and workwear, country music, rodeos, barbers and outdoor brands.",
+    "tips": ["Stack several slab serif lines of different sizes and widths, like a woodtype poster.", "Use the tan and paper shades as backgrounds so the rust and denim tones stand out."]
+  }
+}

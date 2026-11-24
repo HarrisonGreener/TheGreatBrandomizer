@@ -1,13 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Brandomizer</title>
+<title>The Great Brandomizer: Colour Palette and Font Pairing Generator</title>
+<meta name="description" content="Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 35 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.">
+<link rel="canonical" href="https://harrisongreener.github.io/TheGreatBrandomizer/">
+<meta name="theme-color" content="#060405">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="The Great Brandomizer">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Great Brandomizer: Colour Palette and Font Pairing Generator">
+<meta property="og:description" content="Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 35 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.">
+<meta property="og:url" content="https://harrisongreener.github.io/TheGreatBrandomizer/">
+<meta property="og:image" content="https://harrisongreener.github.io/TheGreatBrandomizer/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "The Great Brandomizer", "url": "https://harrisongreener.github.io/TheGreatBrandomizer/", "description": "Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 35 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.", "applicationCategory": "DesignApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires WebGL", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}, "image": "https://harrisongreener.github.io/TheGreatBrandomizer/og-image.png", "creator": {"@type": "Person", "name": "Harrison Greener", "url": "https://harrisongreener.co.uk/"}}</script>
 <style>html,body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Lobster&family=VT323&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
@@ -82,6 +96,22 @@ kbd{font-family:var(--f-led);font-size:16px;background:#2a1915;border-radius:4px
 .loader .big{font-family:var(--f-sign);font-size:clamp(26px,6vw,48px);color:var(--amber-hot);text-shadow:0 0 18px rgba(255,150,40,.6)}
 .loader .led{font-family:var(--f-led);font-size:24px;color:var(--red-led);text-shadow:0 0 8px rgba(255,60,40,.7)}
 .loader.gone{opacity:0;pointer-events:none}
+.loader h1{margin:0;font-weight:400;text-wrap:balance}
+.loader-sub{margin:0;max-width:44ch;color:var(--muted);font-size:15px}
+.chip-hot{border-color:rgba(255,178,62,.55);color:var(--amber-hot)}
+.hud-bl{flex-direction:column;align-items:flex-start;gap:8px}
+.site-nav{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.site-nav a{color:var(--muted);text-decoration:none}
+.site-nav a:hover,.site-nav a:focus-visible{color:var(--amber-hot)}
+.tgroup{display:flex;flex-direction:column;gap:10px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.tcard{display:flex;flex-direction:column;gap:8px;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);padding:12px;min-width:0}
+.tcard:hover{border-color:rgba(255,226,190,.4)}
+.tcard[aria-current="true"]{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.tcard .tn{font-size:clamp(17px,1.6vw,22px);line-height:1.15;color:var(--text);overflow-wrap:anywhere;min-height:2.3em;display:flex;align-items:flex-end}
+.tcard .ts{display:flex;height:18px;border-radius:4px;overflow:hidden}
+.tcard .ts span{flex:1}
+.tcard .tt{font-size:12px;color:var(--muted);line-height:1.35}
 
 /* Payout modal */
 .modal{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(4,2,2,.72);backdrop-filter:blur(4px);
@@ -138,12 +168,14 @@ kbd{font-family:var(--f-led);font-size:16px;background:#2a1915;border-radius:4px
 <div id="stage"></div>
 
 <div class="hud hud-bl">
+  <nav class="site-nav" aria-label="Site"><a href="themes/">Themes</a><a href="guides/">Guides</a><a href="about/">About</a><a href="privacy/">Privacy</a></nav>
   <div class="field">
     <label for="brandName">Name on the reels</label>
     <input id="brandName" maxlength="8" autocomplete="off" spellcheck="false" value="BRAND">
   </div>
 </div>
 <div class="hud hud-br">
+  <button class="chip chip-hot" id="themesBtn">Themes</button>
   <div class="seg" role="group" aria-label="View"><button class="chip" data-view="machine" aria-pressed="true">Machine</button><button class="chip" data-view="reels" aria-pressed="false">Reels</button><button class="chip" data-view="tray" aria-pressed="false">Tray</button></div>
   <button class="chip" id="favBtn">Saved spins</button>
   <button class="chip" id="helpBtn" aria-expanded="false" aria-controls="help">How to play</button>
@@ -153,7 +185,7 @@ kbd{font-family:var(--f-led);font-size:16px;background:#2a1915;border-radius:4px
   <ul>
     <li>Click the <b>handle</b> or <b>START</b> to spin. <kbd>Space</kbd> works too.</li>
     <li><b>HOLD</b> under any reel keeps it on the next spin.</li>
-    <li>Tap a theme on the <b>chart</b> at the top to switch, or press <b>THEME</b> to cycle. <b>COLOURS</b> picks 5, 6 or 7 reels.</li>
+    <li>Open <b>Themes</b> to pick from every theme, tap one on the <b>chart</b> at the top, or press <b>THEME</b> to cycle. <kbd>M</kbd> opens the menu. <b>COLOURS</b> picks 5, 6 or 7 reels.</li>
     <li><b>Machine</b>, <b>Reels</b> and <b>Tray</b> change the view. <kbd>V</kbd> cycles them.</li>
     <li><b>CASH OUT</b> prints your brand card into the tray. Click the card for the full payout.</li>
     <li><b>Drag</b> to look around, <b>scroll</b> or pinch to zoom toward what you're pointing at, <b>right-drag</b> or Shift-drag to pan. Double-click empty space to reset.</li>
@@ -162,7 +194,8 @@ kbd{font-family:var(--f-led);font-size:16px;background:#2a1915;border-radius:4px
 <div class="vh" role="status" aria-live="polite" id="sr"></div>
 
 <div class="loader" id="loader">
-  <div class="big">Brandomizer</div>
+  <h1 class="big">The Great Brandomizer</h1>
+  <p class="loader-sub">Theme-based colour palettes and Google Fonts pairings, spun on a vintage fruit machine.</p>
   <div class="led" id="loadMsg">WARMING UP THE BULBS</div>
 </div>
 
@@ -266,7 +299,112 @@ const THEMES = [
     pool:[{h:[55,75],s:[20,35],l:[30,40]},{h:[12,22],s:[50,65],l:[32,40]},{h:[0,8],s:[40,55],l:[40,48]},{h:[45,52],s:[40,60],l:[50,58]},{h:[30,45],s:[4,10],l:[40,50]},{h:[260,280],s:[15,25],l:[30,38]}],
     heads:["Staatliches","Special Elite","Permanent Marker","Rock Salt","Rubik Wet Paint","Oswald"], bodies:["Courier Prime","Barlow Condensed","Oswald","Archivo Narrow"],
     house:{name:"Basement Show",colors:["#141210","#5b5a2e","#8e3b23","#a6403a","#b89a3a","#6b6560","#dcd5c4"],head:"Staatliches",body:"Courier Prime"}},
+  {id:"victorian", name:"Victorian", tag:"Ornate type, ink and parchment.",
+    dark:{h:[10,30],s:[20,35],l:[8,12]}, light:{h:[38,46],s:[35,50],l:[86,91]},
+    pool:[{h:[345,355],s:[50,65],l:[22,30]},{h:[140,160],s:[30,45],l:[20,28]},{h:[40,46],s:[55,70],l:[45,52]},{h:[210,220],s:[15,25],l:[30,38]},{h:[15,22],s:[50,60],l:[35,42]},{h:[300,320],s:[20,30],l:[25,32]}],
+    heads:["Playfair Display","Abril Fatface","Ultra","Old Standard TT","Rye","Sancreek"], bodies:["Old Standard TT","EB Garamond","Libre Baskerville","Crimson Text"],
+    house:{name:"Gaslight Parlour",colors:["#1d1410","#6e1a2b","#1f4433","#b8892f","#3e4a5c","#8a3a20","#efe3c8"],head:"Playfair Display",body:"Old Standard TT"}},
+  {id:"midcentury", name:"Mid-Century", tag:"Atomic optimism, walnut and teal.",
+    dark:{h:[20,30],s:[25,40],l:[12,18]}, light:{h:[40,48],s:[40,55],l:[90,93]},
+    pool:[{h:[175,185],s:[40,55],l:[35,45]},{h:[40,46],s:[70,85],l:[48,55]},{h:[15,25],s:[70,85],l:[48,55]},{h:[60,80],s:[30,45],l:[38,46]},{h:[20,28],s:[35,50],l:[28,35]},{h:[8,15],s:[55,70],l:[62,70]}],
+    heads:["Righteous","Josefin Sans","Abril Fatface","Rammetto One","Fredoka","Playfair Display"], bodies:["Jost","Karla","Libre Franklin","Mulish"],
+    house:{name:"Atomic Lounge",colors:["#2a1c14","#2c7a76","#d9a520","#d4622a","#6b6b2e","#e9846d","#f5ecd8"],head:"Righteous",body:"Jost"}},
+  {id:"spaceage", name:"Space Age", tag:"Chrome, curves and countdowns.",
+    dark:{h:[215,230],s:[40,60],l:[8,14]}, light:{h:[200,220],s:[10,20],l:[92,96]},
+    pool:[{h:[20,28],s:[90,100],l:[52,58]},{h:[210,220],s:[5,12],l:[68,78]},{h:[355,360],s:[75,85],l:[45,50]},{h:[195,205],s:[60,75],l:[55,62]},{h:[42,48],s:[80,90],l:[50,56]}],
+    heads:["Michroma","Orbitron","Audiowide","Syncopate","Krona One","Nova Square"], bodies:["Exo 2","Lexend","Titillium Web","Saira"],
+    house:{name:"Lunar Module",colors:["#0f1830","#ff6b1a","#b9c0c9","#c9282d","#4fb3d9","#e3a81f","#f2f5f8"],head:"Michroma",body:"Titillium Web"}},
+  {id:"artnouveau", name:"Art Nouveau", tag:"Nature, curved and gilded.",
+    dark:{h:[150,180],s:[20,30],l:[10,15]}, light:{h:[40,50],s:[40,55],l:[88,92]},
+    pool:[{h:[90,120],s:[20,30],l:[50,60]},{h:[40,48],s:[60,75],l:[48,56]},{h:[300,330],s:[25,40],l:[30,40]},{h:[170,190],s:[30,45],l:[30,40]},{h:[0,15],s:[35,50],l:[65,72]},{h:[20,28],s:[50,60],l:[42,50]}],
+    heads:["Cinzel Decorative","Federo","Della Respira","Marcellus","Italiana","Cormorant"], bodies:["Cormorant Garamond","EB Garamond","Lora","Crimson Pro"],
+    house:{name:"Whiplash Garden",colors:["#16241f","#8aa37b","#c99a2e","#5b2f4a","#2f6866","#d99a8c","#f4ead2"],head:"Cinzel Decorative",body:"Cormorant Garamond"}},
+  {id:"bauhaus", name:"Bauhaus", tag:"Form follows function. Then add red.",
+    dark:{h:[0,30],s:[5,15],l:[8,12]}, light:{h:[40,48],s:[35,50],l:[90,94]},
+    pool:[{h:[2,8],s:[75,85],l:[45,52]},{h:[44,50],s:[90,100],l:[52,58]},{h:[215,225],s:[65,80],l:[35,45]},{h:[30,40],s:[5,10],l:[55,65]},{h:[40,48],s:[20,30],l:[80,86]}],
+    heads:["League Spartan","Jost","Josefin Sans","Syncopate","Red Hat Display","Kumbh Sans"], bodies:["Jost","Work Sans","DM Sans","Karla"],
+    house:{name:"Dessau",colors:["#141210","#d7261e","#f2b70c","#1d4f9c","#8e8a83","#e6dfcd","#f6f1e4"],head:"League Spartan",body:"Jost"}},
+  {id:"constructivism", name:"Constructivism", tag:"Bold angles for loud ideas.",
+    dark:{h:[0,20],s:[10,20],l:[6,10]}, light:{h:[38,46],s:[30,45],l:[86,91]},
+    pool:[{h:[355,365],s:[80,90],l:[42,50]},{h:[45,60],s:[20,35],l:[55,65]},{h:[30,40],s:[5,8],l:[30,40]},{h:[10,18],s:[55,70],l:[35,42]},{h:[205,215],s:[20,30],l:[35,45]}],
+    heads:["Rubik Mono One","Russo One","Oswald","Big Shoulders Display","Bebas Neue","Alumni Sans"], bodies:["Roboto Condensed","PT Sans Narrow","IBM Plex Sans Condensed","Barlow Condensed"],
+    house:{name:"Agitprop",colors:["#151112","#c8161d","#e9dcbf","#8f8a6a","#3b3a3a","#9c3a22","#f3ead3"],head:"Rubik Mono One",body:"Roboto Condensed"}},
+  {id:"destijl", name:"De Stijl", tag:"Primary colours, straight lines.",
+    dark:{h:[0,0],s:[0,0],l:[5,8]}, light:{h:[40,50],s:[10,25],l:[94,97]},
+    pool:[{h:[355,360],s:[80,90],l:[45,50]},{h:[48,52],s:[95,100],l:[52,56]},{h:[220,230],s:[80,95],l:[30,38]},{h:[0,0],s:[0,0],l:[75,85]},{h:[0,0],s:[0,0],l:[35,45]}],
+    heads:["Rubik Mono One","Archivo Black","Unbounded","Lexend Mega","Dela Gothic One","Bungee"], bodies:["Lexend","Work Sans","Space Grotesk","Inter"],
+    house:{name:"Composition II",colors:["#101010","#d1201a","#f5cb0f","#1a3c9e","#c9c9c7","#5c5c5c","#f6f3ea"],head:"Rubik Mono One",body:"Lexend"}},
+  {id:"swiss", name:"Swiss Style", tag:"Clean grids. Objective type.",
+    dark:{h:[0,0],s:[0,0],l:[6,9]}, light:{h:[0,40],s:[0,8],l:[94,97]},
+    pool:[{h:[355,362],s:[85,95],l:[46,52]},{h:[0,0],s:[0,0],l:[55,70]},{h:[0,0],s:[0,0],l:[82,88]},{h:[210,220],s:[70,85],l:[40,48]},{h:[0,0],s:[0,0],l:[22,30]}],
+    heads:["Inter Tight","Archivo","Instrument Sans","Schibsted Grotesk","Hanken Grotesk","Familjen Grotesk"], bodies:["Inter","Instrument Sans","IBM Plex Sans","Work Sans"],
+    house:{name:"Grid Zurich",colors:["#111111","#e2231a","#f4f4f2","#9a9a9a","#d6d6d4","#1f5aa6","#2b2b2b"],head:"Inter Tight",body:"Inter"}},
+  {id:"popart", name:"Pop Art", tag:"Big, bright and printed in dots.",
+    dark:{h:[0,360],s:[0,10],l:[6,10]}, light:{h:[45,55],s:[40,60],l:[94,97]},
+    pool:[{h:[355,360],s:[85,95],l:[50,55]},{h:[50,55],s:[95,100],l:[55,60]},{h:[190,200],s:[80,95],l:[50,58]},{h:[320,335],s:[80,95],l:[62,70]},{h:[215,225],s:[80,95],l:[45,52]}],
+    heads:["Bangers","Luckiest Guy","Titan One","Chango","Bowlby One","Lilita One"], bodies:["Poppins","Nunito","Kanit","Varela Round"],
+    house:{name:"Ben-Day Dots",colors:["#111014","#ec1c24","#ffe11a","#21a7e0","#ff6fb0","#1d5fd1","#fff8e6"],head:"Bangers",body:"Poppins"}},
+  {id:"psychedelic", name:"Psychedelic", tag:"Melting colour, wavy type.",
+    dark:{h:[270,290],s:[40,60],l:[10,15]}, light:{h:[45,55],s:[70,90],l:[88,92]},
+    pool:[{h:[300,320],s:[75,90],l:[50,58]},{h:[18,28],s:[90,100],l:[52,58]},{h:[70,85],s:[80,95],l:[50,58]},{h:[265,280],s:[60,75],l:[45,55]},{h:[170,180],s:[70,85],l:[42,50]},{h:[45,52],s:[95,100],l:[55,60]}],
+    heads:["Kavoon","Shrikhand","Fascinate","Bungee Shade","Rampart One","Monoton"], bodies:["Quicksand","Comfortaa","Josefin Sans","Nunito"],
+    house:{name:"Electric Haze",colors:["#2a0f3d","#e0279b","#ff7a1a","#a6d61c","#7b3fd1","#18b3a5","#fff0c9"],head:"Kavoon",body:"Quicksand"}},
+  {id:"punk", name:"Punk Zine", tag:"Cut, paste, photocopy, shout.",
+    dark:{h:[0,0],s:[0,0],l:[4,8]}, light:{h:[40,50],s:[10,20],l:[88,93]},
+    pool:[{h:[325,335],s:[90,100],l:[55,62]},{h:[55,60],s:[95,100],l:[55,60]},{h:[355,360],s:[85,95],l:[45,50]},{h:[40,50],s:[5,10],l:[60,72]},{h:[110,125],s:[70,85],l:[42,48]}],
+    heads:["Permanent Marker","Rubik Wet Paint","Special Elite","Staatliches","Rubik Glitch","Rock Salt"], bodies:["Special Elite","Courier Prime","IBM Plex Mono","Space Mono"],
+    house:{name:"Safety Pin",colors:["#0b0b0b","#ff2d8a","#fff200","#e01b24","#a9a49a","#2fa84f","#eae4d6"],head:"Permanent Marker",body:"Special Elite"}},
+  {id:"minimal", name:"Minimal", tag:"Less, then a little less.",
+    dark:{h:[0,40],s:[0,6],l:[8,12]}, light:{h:[0,40],s:[0,6],l:[96,99]},
+    pool:[{h:[0,40],s:[0,6],l:[40,50]},{h:[0,40],s:[0,6],l:[70,80]},{h:[0,40],s:[0,6],l:[86,92]},{r:1,h:[0,360],s:[70,90],l:[45,55]}],
+    heads:["Manrope","Inter Tight","Albert Sans","Outfit","Figtree","Urbanist"], bodies:["Inter","DM Sans","Figtree","Karla"],
+    house:{name:"White Space",colors:["#141414","#6b6b6b","#bdbdbd","#e6e6e6","#2f6bff","#8f8f8f","#fafafa"],head:"Manrope",body:"Inter"}},
+  {id:"japandi", name:"Japandi", tag:"Quiet, warm and carefully made.",
+    dark:{h:[25,40],s:[8,15],l:[12,18]}, light:{h:[35,45],s:[20,30],l:[92,95]},
+    pool:[{h:[80,100],s:[10,20],l:[55,65]},{h:[15,25],s:[30,45],l:[55,65]},{h:[30,38],s:[30,45],l:[60,70]},{h:[30,40],s:[5,10],l:[30,38]},{h:[220,230],s:[25,40],l:[30,38]},{h:[35,45],s:[8,15],l:[75,82]}],
+    heads:["Shippori Mincho","Zen Old Mincho","Zen Kaku Gothic New","Kaisei Opti","Sawarabi Mincho","Zen Maru Gothic"], bodies:["Zen Kaku Gothic New","Noto Sans","Karla","Albert Sans"],
+    house:{name:"Paper Lantern",colors:["#24201c","#8f9b85","#c27a5b","#c9a77a","#3a3f57","#d8d0c3","#f5f0e8"],head:"Shippori Mincho",body:"Zen Kaku Gothic New"}},
+  {id:"kawaii", name:"Kawaii", tag:"Soft, sweet and very round.",
+    dark:{h:[260,290],s:[25,40],l:[14,19]}, light:{h:[330,350],s:[60,80],l:[94,97]},
+    pool:[{h:[330,345],s:[80,95],l:[78,84]},{h:[150,165],s:[50,70],l:[75,82]},{h:[260,275],s:[60,80],l:[78,84]},{h:[48,55],s:[90,100],l:[78,84]},{h:[195,205],s:[70,85],l:[76,82]},{h:[5,15],s:[85,95],l:[70,76]}],
+    heads:["Mochiy Pop One","Fredoka","Sniglet","Baloo 2","Chewy","Gluten"], bodies:["M PLUS Rounded 1c","Quicksand","Nunito","Varela Round"],
+    house:{name:"Strawberry Milk",colors:["#3a2a4a","#ffa6c9","#a8e6cf","#cdb4ff","#ffe58f","#9ad8f5","#fff5fa"],head:"Mochiy Pop One",body:"M PLUS Rounded 1c"}},
+  {id:"vaporwave", name:"Vaporwave", tag:"Aesthetic dreams from a 1995 mall.",
+    dark:{h:[250,270],s:[40,60],l:[10,16]}, light:{h:[300,330],s:[50,70],l:[92,95]},
+    pool:[{h:[320,335],s:[75,90],l:[68,75]},{h:[170,180],s:[60,75],l:[55,62]},{h:[270,285],s:[55,70],l:[55,65]},{h:[15,25],s:[80,90],l:[72,78]},{h:[195,205],s:[70,85],l:[62,70]}],
+    heads:["Audiowide","Monoton","Press Start 2P","Orbitron","Michroma","VT323"], bodies:["Space Mono","Lexend","Exo 2","Rajdhani"],
+    house:{name:"Mall Soft",colors:["#1d1238","#ff8ad8","#3fd4c4","#9b6bff","#ffb38a","#6fd0ff","#fbeefe"],head:"Audiowide",body:"Space Mono"}},
+  {id:"cyberpunk", name:"Cyberpunk", tag:"High tech, low life, loud neon.",
+    dark:{h:[230,260],s:[30,50],l:[5,9]}, light:{h:[55,60],s:[95,100],l:[60,68]},
+    pool:[{h:[180,190],s:[95,100],l:[50,55]},{h:[310,320],s:[95,100],l:[55,60]},{h:[350,358],s:[90,100],l:[50,55]},{h:[220,230],s:[15,25],l:[25,35]},{h:[265,275],s:[70,85],l:[45,55]}],
+    heads:["Orbitron","Oxanium","Russo One","Chakra Petch","Audiowide","Rajdhani"], bodies:["Share Tech Mono","Rajdhani","Exo 2","JetBrains Mono"],
+    house:{name:"Neon Rain",colors:["#0a0b14","#fcee0a","#00e5ff","#ff2bd6","#ff2a45","#2a3148","#7a2cff"],head:"Orbitron",body:"Share Tech Mono"}},
+  {id:"risograph", name:"Risograph", tag:"Misregistered ink on warm paper.",
+    dark:{h:[225,240],s:[30,45],l:[15,22]}, light:{h:[40,48],s:[30,45],l:[92,95]},
+    pool:[{h:[335,345],s:[90,100],l:[62,68]},{h:[215,225],s:[75,90],l:[40,48]},{h:[48,54],s:[95,100],l:[55,60]},{h:[175,185],s:[60,75],l:[40,48]},{h:[15,22],s:[90,100],l:[55,62]},{h:[140,155],s:[50,65],l:[40,48]}],
+    heads:["Bricolage Grotesque","Archivo Black","Darker Grotesque","Syne","Space Grotesk","Rubik"], bodies:["Space Grotesk","Work Sans","IBM Plex Mono","DM Sans"],
+    house:{name:"Two-Drum Print",colors:["#1e2a4a","#ff48b0","#0078bf","#ffe800","#00838a","#ff6c2f","#f6f0e2"],head:"Bricolage Grotesque",body:"Space Grotesk"}},
+  {id:"gothic", name:"Gothic", tag:"Blackletter, candlelight and velvet.",
+    dark:{h:[260,290],s:[10,25],l:[4,8]}, light:{h:[35,45],s:[15,25],l:[84,90]},
+    pool:[{h:[350,358],s:[70,85],l:[25,32]},{h:[270,285],s:[35,50],l:[25,35]},{h:[0,0],s:[0,0],l:[35,45]},{h:[150,165],s:[40,55],l:[20,28]},{h:[220,230],s:[5,10],l:[60,70]}],
+    heads:["UnifrakturMaguntia","Pirata One","Grenze Gotisch","Metal Mania","Cinzel","IM Fell English"], bodies:["IM Fell English","EB Garamond","Cormorant Garamond","Spectral"],
+    house:{name:"Candlelit Crypt",colors:["#0b0a0f","#7a0f1c","#3f2a5c","#4a4a4a","#123b2c","#9fa3aa","#e9e1d1"],head:"UnifrakturMaguntia",body:"IM Fell English"}},
+  {id:"western", name:"Western", tag:"Wanted: bold slab serifs.",
+    dark:{h:[20,30],s:[30,45],l:[10,15]}, light:{h:[35,45],s:[40,55],l:[86,91]},
+    pool:[{h:[12,20],s:[60,75],l:[38,45]},{h:[30,38],s:[40,55],l:[55,65]},{h:[210,220],s:[35,50],l:[35,45]},{h:[172,182],s:[45,60],l:[40,48]},{h:[80,100],s:[15,25],l:[50,58]},{h:[40,46],s:[60,75],l:[48,55]}],
+    heads:["Rye","Sancreek","Ultra","Smokum","Alfa Slab One","Holtwood One SC"], bodies:["Zilla Slab","Roboto Slab","Arvo","Bitter"],
+    house:{name:"Dust Road",colors:["#231710","#a8461e","#c59a6a","#3d5b82","#2f8f86","#d2a02e","#f3e6cc"],head:"Rye",body:"Zilla Slab"}},
 ];
+// themes grouped for the menu and the cabinet chart
+const CATS=[
+  ["Eras",["victorian","midcentury","spaceage","sixties","seventies","eighties","nineties","y2k"]],
+  ["Movements",["artnouveau","deco","bauhaus","constructivism","destijl","swiss","popart","psychedelic","brutalist","punk"]],
+  ["Styles",["modern","minimal","bold","luxury","editorial","tech","nordic","japandi","organic","tropical","kawaii"]],
+  ["Scenes",["grunge","vaporwave","cyberpunk","risograph","gothic","western"]],
+];
+{const ord=CATS.flatMap(([c,ids])=>ids.map(id=>[id,c]));
+ ord.forEach(([id,c])=>{const t=THEMES.find(t=>t.id===id);if(t)t.cat=c;});
+ THEMES.sort((a,b)=>ord.findIndex(o=>o[0]===a.id)-ord.findIndex(o=>o[0]===b.id));}
 const JACKPOT_ODDS = 1/40;
 
 /* =================================================================
@@ -307,11 +445,13 @@ function contrastPairs(cs){
    ================================================================= */
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
 const state={
-  ti:1, n:5, colors:[], holds:[], head:"", body:"", holdHead:false, holdBody:false,
+  ti:Math.max(0,THEMES.findIndex(t=>t.id==="seventies")), n:5, colors:[], holds:[], head:"", body:"", holdHead:false, holdBody:false,
   name:"BRAND", spins:0, busy:false, spinning:false, landed:false, lastJackpot:false,
   muted:store.get("brandomizer:muted",false), favs:store.get("brandomizer:favs",[]),
 };
 const theme=()=>THEMES[state.ti];
+let chartCat=0;
+const catThemes=(k)=>THEMES.filter(t=>t.cat===CATS[k][0]);
 const nameChars=()=>{const s=(state.name||"").trim().toUpperCase();return Array.from(s.length?s:"BRAND").slice(0,8);};
 
 /* =================================================================
@@ -335,7 +475,7 @@ function ensureFont(name){
 }
 function ensureTheme(t){
   const all=[...t.heads,...t.bodies,t.house.head,t.house.body].map(ensureFont);
-  return Promise.race([Promise.all(all),new Promise(r=>setTimeout(r,5000))]);
+  return Promise.race([Promise.all(all),new Promise(r=>setTimeout(r,3000))]);
 }
 const readyHeads=()=>{const l=theme().heads.filter(f=>fontReady.has(f));return l.length?l:["Bungee"];};
 const readyBodies=()=>{const l=theme().bodies.filter(f=>fontReady.has(f));return l.length?l:["Barlow"];};
@@ -682,18 +822,23 @@ function drawUpper(){
   // theme chart (pay table)
   goldFrame(x,44,216,1012,222,8,12);
   x.fillStyle="#0d1c66";rrect(x,44,216,1012,222,6);x.fill();
-  x.fillStyle="#ffd84a";x.font='700 20px "Barlow Condensed", sans-serif';x.textAlign="left";
-  x.save();x.letterSpacing="3px";x.fillText("THEME",62,240);x.fillText("HOUSE PICK",300,240);x.fillText("THEME",568,240);x.fillText("HOUSE PICK",806,240);x.restore();
-  x.fillStyle="#0c0606";rrect(x,700,201,250,20,4);x.fill();x.fillStyle="#ff6a4a";x.textAlign="center";x.font='700 15px "Barlow Condensed", sans-serif';x.save();x.letterSpacing="2px";x.fillText("TAP A THEME · JACKPOT 1 IN 40",825,216);x.restore();
-    THEMES.forEach((th,i)=>{
-    const col=i<8?0:1,row=i%8,X=54+col*506,Y=248+row*23.4;
-    const active=i===state.ti;
-    if(active){x.fillStyle="#ffd84a";rrect(x,X,Y,492,22,4);x.fill();}
-    else{x.fillStyle=row%2?"rgba(40,70,190,.55)":"rgba(28,52,160,.55)";x.fillRect(X,Y,492,22);}
+  // category tabs
+  x.textBaseline="middle";
+  CATS.forEach(([c,ids],k)=>{const X=54+k*249,on=k===chartCat;
+    x.fillStyle=on?"#ffd84a":"rgba(10,20,90,.9)";rrect(x,X,223,241,21,4);x.fill();
+    x.fillStyle=on?"#2a0d00":"#ffe27a";x.font='700 16px "Barlow Condensed", sans-serif';x.textAlign="center";
+    x.save();x.letterSpacing="3px";x.fillText(c.toUpperCase()+" · "+ids.length,X+120,234);x.restore();});
+  x.fillStyle="#0c0606";rrect(x,610,199,440,21,4);x.fill();x.fillStyle="#ff6a4a";x.textAlign="center";
+  fitText(x,"TAP A THEME · ALL "+THEMES.length+" IN THE THEMES MENU · JACKPOT 1 IN 40",420,15,'"Barlow Condensed", sans-serif',"700");x.fillText("TAP A THEME · ALL "+THEMES.length+" IN THE THEMES MENU · JACKPOT 1 IN 40",830,210);
+  catThemes(chartCat).forEach((th,i)=>{
+    const col=i<6?0:1,row=i%6,X=54+col*506,Y=250+row*31;
+    const active=th===theme();
+    if(active){x.fillStyle="#ffd84a";rrect(x,X,Y,492,28,4);x.fill();}
+    else{x.fillStyle=row%2?"rgba(40,70,190,.55)":"rgba(28,52,160,.55)";x.fillRect(X,Y,492,28);}
     x.textAlign="left";x.textBaseline="middle";
-    x.fillStyle=active?"#2a0d00":"#ffe27a";x.font='700 18px "Barlow Condensed", sans-serif';x.fillText((active?"▶ ":"")+th.name.toUpperCase(),X+8,Y+12);
-    th.house.colors.forEach((c,k)=>{x.fillStyle=c;x.fillRect(X+150+k*18,Y+3,16,16);});
-    x.fillStyle=active?"#2a0d00":"#ffffff";x.font='600 16px "Barlow Condensed", sans-serif';x.fillText(th.house.name.toUpperCase(),X+290,Y+12);
+    x.fillStyle=active?"#2a0d00":"#ffe27a";x.font='700 20px "Barlow Condensed", sans-serif';x.fillText((active?"▶ ":"")+th.name.toUpperCase(),X+8,Y+15);
+    th.house.colors.forEach((c,k)=>{x.fillStyle=c;x.fillRect(X+164+k*19,Y+5,17,18);});
+    x.fillStyle=active?"#2a0d00":"#ffffff";x.font='600 17px "Barlow Condensed", sans-serif';fitText(x,th.house.name.toUpperCase(),190,17,'"Barlow Condensed", sans-serif',"600");x.fillText(th.house.name.toUpperCase(),X+300,Y+15);
   });
   x.textBaseline="alphabetic";
 
@@ -889,14 +1034,17 @@ function toggleHold(i){
 async function cycleTheme(){setThemeIndex((state.ti+1)%THEMES.length);}
 async function setThemeIndex(i){
   if(state.busy||state.spinning||i===state.ti)return;
-  state.ti=i;setLed(theme().name+" · pull the handle");
+  state.ti=i;chartCat=Math.max(0,CATS.findIndex(c=>c[0]===theme().cat));try{history.replaceState(null,"","#theme-"+theme().id);}catch(e){}setLed(theme().name+" · pull the handle");
   await ensureTheme(theme());drawUpper();
 }
-function chartIndexAt(uv){
+function chartHit(uv){
+  if(!uv)return null;
   const x=uv.x*1100,y=(1-uv.y)*1036;
-  if(y<248||y>248+8*23.4)return -1;
-  const col=x>=54&&x<546?0:x>=560&&x<1052?1:-1;if(col<0)return -1;
-  const i=col*8+Math.floor((y-248)/23.4);return i<THEMES.length?i:-1;
+  if(y>=221&&y<=246&&x>=54&&x<1050){const k=Math.min(CATS.length-1,Math.floor((x-54)/249));return{tab:k};}
+  if(y<250||y>250+6*31)return null;
+  const col=x>=54&&x<546?0:x>=560&&x<1052?1:-1;if(col<0)return null;
+  const list=catThemes(chartCat),i=col*6+Math.floor((y-250)/31);
+  return list[i]?{theme:THEMES.indexOf(list[i])}:null;
 }
 function cycleCount(){
   if(state.busy||state.spinning)return;
@@ -1184,7 +1332,7 @@ function updateCamera(now){
 const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
 let down=null,hovered=null;
 function pickHit(ev){const r=renderer.domElement.getBoundingClientRect();ndc.set(((ev.clientX-r.left)/r.width)*2-1,-((ev.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ndc,camera);const hits=ray.intersectObjects(clickables,false).filter(h=>h.object.visible);return hits[0]||null;}
-function pickAt(ev){const h=pickHit(ev);if(!h)return null;if(h.object.userData.chart&&chartIndexAt(h.uv)<0)return null;return h.object;}
+function pickAt(ev){const h=pickHit(ev);if(!h)return null;if(h.object.userData.chart&&!chartHit(h.uv))return null;return h.object;}
 const _rv=new THREE.Vector3(),_uv=new THREE.Vector3();
 function pointAt(ev){const r=renderer.domElement.getBoundingClientRect();ndc.set(((ev.clientX-r.left)/r.width)*2-1,-((ev.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ndc,camera);const h=ray.intersectObject(machine,true)[0];return h?h.point:null;}
 let pinch=null;
@@ -1193,7 +1341,7 @@ renderer.domElement.addEventListener("pointerdown",e=>{down={x:e.clientX,y:e.cli
 renderer.domElement.addEventListener("pointerup",e=>{
   if(!down)return;const d=down;down=null;if(d.drag||Math.hypot(e.clientX-d.x,e.clientY-d.y)>8)return;
   const h=pickHit(e);if(!h)return;const o=h.object;
-  if(o.userData.chart){const i=chartIndexAt(h.uv);if(i>=0){sfx.button(true);setThemeIndex(i);}return;}
+  if(o.userData.chart){const c=chartHit(h.uv);if(c&&c.tab!=null){sfx.button(true);chartCat=c.tab;drawUpper();}else if(c){sfx.button(true);setThemeIndex(c.theme);}return;}
   if(o.userData.btn)o.userData.btn.press();
   else if(o.userData.lever)pull();
   else if(o.userData.coin){if(!state.busy&&!state.spinning){sfx.coin();setTimeout(()=>sfx.coin(),90);setLed("IDEA ACCEPTED");setTimeout(pull,350);}}
@@ -1232,6 +1380,7 @@ document.addEventListener("keydown",e=>{
   if(!document.getElementById("modal").hidden){if(e.key==="Escape")closeModal();return;}
   if(e.code==="Space"&&!e.repeat&&tag!=="button"){e.preventDefault();startBtn.press();}
   else if(e.key==="t"||e.key==="T")themeBtn.press();
+  else if(e.key==="m"||e.key==="M")openThemes();
   else if(e.key==="c"||e.key==="C")cashBtn.press();
   else if(e.key==="v"||e.key==="V"){const ks=Object.keys(VIEWS);setView(ks[(ks.indexOf(view)+1)%ks.length]);}
   else if(/^[1-7]$/.test(e.key)){const i=+e.key-1;if(colourHolds[i])colourHolds[i].press();}
@@ -1240,6 +1389,7 @@ const nameInput=document.getElementById("brandName");
 nameInput.addEventListener("input",()=>{const v=nameInput.value.replace(/[^A-Za-z0-9&!?]/g,"").slice(0,8);state.name=v;if(!state.busy&&!state.spinning){buildLetterReels();}});
 nameInput.addEventListener("keydown",e=>{if(e.key==="Enter")nameInput.blur();});
 const helpBtn=document.getElementById("helpBtn"),help=document.getElementById("help");
+document.getElementById("themesBtn").addEventListener("click",()=>openThemes());
 helpBtn.addEventListener("click",()=>{help.hidden=!help.hidden;helpBtn.setAttribute("aria-expanded",String(!help.hidden));});
 document.getElementById("favBtn").addEventListener("click",()=>openPayout(null));
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
@@ -1296,6 +1446,20 @@ function openPayout(res){
   sheet.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{state.favs.splice(+b.dataset.del,1);store.set("brandomizer:favs",state.favs);openPayout(res);});
   sheet.querySelectorAll("[data-load]").forEach(b=>b.onclick=()=>{loadFav(state.favs[+b.dataset.load]);closeModal();});
 }
+function openThemes(){
+  if(state.busy||state.spinning)return;
+  lastFocus=document.activeElement;
+  THEMES.forEach(t=>ensureFont(t.house.head));
+  sheet.innerHTML=`<div class="sheet-head"><h2 id="modalTitle">Choose a theme</h2><button class="ghost" id="closeModal">Close</button></div>
+    ${CATS.map(([c])=>`<section class="tgroup"><h3>${c}</h3><div class="tgrid">${THEMES.filter(t=>t.cat===c).map(t=>`<button class="tcard" data-ti="${THEMES.indexOf(t)}" aria-current="${t===theme()}">
+      <span class="tn" style="font-family:'${esc(t.house.head)}',var(--f-sign)">${esc(t.name)}</span>
+      <span class="ts">${t.house.colors.map(x=>`<span style="background:${x}"></span>`).join("")}</span>
+      <span class="tt">${esc(t.tag)}</span></button>`).join("")}</div></section>`).join("")}`;
+  modal.hidden=false;
+  document.getElementById("closeModal").onclick=closeModal;
+  sheet.querySelectorAll("[data-ti]").forEach(b=>b.onclick=()=>{sfx.button(true);closeModal();setThemeIndex(+b.dataset.ti);});
+  (sheet.querySelector('[aria-current="true"]')||document.getElementById("closeModal")).focus();
+}
 function closeModal(){modal.hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
 modal.addEventListener("click",e=>{if(e.target===modal)closeModal();});
 async function loadFav(f){
@@ -1332,6 +1496,8 @@ async function init(){
   await Promise.race([Promise.all(uiFonts.map(f=>document.fonts.load(f))),new Promise(r=>setTimeout(r,6000))]);
   // if any face arrives late, repaint the painted panels so nothing stays in a fallback font
   document.fonts.addEventListener("loadingdone",()=>{drawLowerFront();drawUpper();});
+  {const m=/^#theme-([a-z0-9-]+)$/.exec(location.hash);const k=m?THEMES.findIndex(t=>t.id===m[1]):-1;if(k>=0)state.ti=k;}
+  chartCat=Math.max(0,CATS.findIndex(c=>c[0]===theme().cat));
   await ensureTheme(theme());
   state.colors=genPalette(theme(),Array(state.n).fill(null));state.holds=state.colors.map(()=>false);
   state.head=readyHeads()[0];state.body=readyBodies()[0];
@@ -1343,8 +1509,8 @@ async function init(){
   introT0=performance.now();
   document.getElementById("loader").classList.add("gone");
   requestAnimationFrame(loop);
-  // warm the other themes' fonts in the background
-  setTimeout(()=>THEMES.forEach(t=>ensureTheme(t)),2500);
+  // warm the fonts of the current theme group in the background
+  setTimeout(()=>catThemes(chartCat).forEach(t=>ensureTheme(t)),3000);
 }
 init().catch(err=>{console.error(err);document.getElementById("loadMsg").textContent="COULDN'T START THE MACHINE. RELOAD TO TRY AGAIN.";});
 </script>
