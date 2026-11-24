@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Great Brandomizer: Colour Palette and Font Pairing Generator</title>
-<meta name="description" content="Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 35 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.">
+<meta name="description" content="Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 38 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.">
 <link rel="canonical" href="https://harrisongreener.github.io/TheGreatBrandomizer/">
 <meta name="theme-color" content="#060405">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:site_name" content="The Great Brandomizer">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Great Brandomizer: Colour Palette and Font Pairing Generator">
-<meta property="og:description" content="Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 35 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.">
+<meta property="og:description" content="Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 38 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.">
 <meta property="og:url" content="https://harrisongreener.github.io/TheGreatBrandomizer/">
 <meta property="og:image" content="https://harrisongreener.github.io/TheGreatBrandomizer/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "The Great Brandomizer", "url": "https://harrisongreener.github.io/TheGreatBrandomizer/", "description": "Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 35 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.", "applicationCategory": "DesignApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires WebGL", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}, "image": "https://harrisongreener.github.io/TheGreatBrandomizer/og-image.png", "creator": {"@type": "Person", "name": "Harrison Greener", "url": "https://harrisongreener.co.uk/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "The Great Brandomizer", "url": "https://harrisongreener.github.io/TheGreatBrandomizer/", "description": "Pull the handle on a 3D vintage fruit machine to spin brand colour palettes and Google Fonts pairings from 38 design themes. Hold what you like, check WCAG contrast and download your brand card. Free.", "applicationCategory": "DesignApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires WebGL", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}, "image": "https://harrisongreener.github.io/TheGreatBrandomizer/og-image.png", "creator": {"@type": "Person", "name": "Harrison Greener", "url": "https://harrisongreener.co.uk/"}}</script>
 <style>html,body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
@@ -394,13 +394,28 @@ const THEMES = [
     pool:[{h:[12,20],s:[60,75],l:[38,45]},{h:[30,38],s:[40,55],l:[55,65]},{h:[210,220],s:[35,50],l:[35,45]},{h:[172,182],s:[45,60],l:[40,48]},{h:[80,100],s:[15,25],l:[50,58]},{h:[40,46],s:[60,75],l:[48,55]}],
     heads:["Rye","Sancreek","Ultra","Smokum","Alfa Slab One","Holtwood One SC"], bodies:["Zilla Slab","Roboto Slab","Arvo","Bitter"],
     house:{name:"Dust Road",colors:["#231710","#a8461e","#c59a6a","#3d5b82","#2f8f86","#d2a02e","#f3e6cc"],head:"Rye",body:"Zilla Slab"}},
+  {id:"memphis", name:"Memphis", tag:"Squiggles, terrazzo and clashing fun.",
+    dark:{h:[0,0],s:[0,0],l:[5,9]}, light:{h:[35,45],s:[50,70],l:[94,97]},
+    pool:[{h:[330,340],s:[90,100],l:[65,72]},{h:[45,50],s:[95,100],l:[58,64]},{h:[170,178],s:[60,75],l:[45,52]},{h:[225,232],s:[70,85],l:[50,58]},{h:[352,358],s:[75,85],l:[52,58]},{h:[150,160],s:[50,65],l:[75,82]}],
+    heads:["Chango","Bowlby One","Righteous","Lilita One","Sniglet","Titan One"], bodies:["Poppins","Nunito","Work Sans","Kanit"],
+    house:{name:"Milano 81",colors:["#111111","#ff5fa2","#ffd23f","#2ec4b6","#3b5bdb","#e63946","#fdf6ec"],head:"Chango",body:"Poppins"}},
+  {id:"opart", name:"Op Art", tag:"Stripes that won't sit still.",
+    dark:{h:[0,0],s:[0,0],l:[3,6]}, light:{h:[0,40],s:[0,8],l:[95,98]},
+    pool:[{h:[355,360],s:[85,95],l:[46,52]},{h:[225,235],s:[80,95],l:[40,48]},{h:[0,0],s:[0,0],l:[45,65]},{h:[50,55],s:[95,100],l:[50,56]},{h:[105,120],s:[75,90],l:[42,48]},{h:[275,285],s:[60,75],l:[45,52]}],
+    heads:["Monoton","Syncopate","Major Mono Display","Bungee Shade","Rubik Mono One","Unbounded"], bodies:["Lexend","Space Grotesk","Inter","Work Sans"],
+    house:{name:"Moir\u00e9",colors:["#0a0a0a","#f7f7f2","#e2231a","#1f3fbf","#9a9a9a","#ffd400","#5a5a5a"],head:"Monoton",body:"Lexend"}},
+  {id:"acidrave", name:"Acid Rave", tag:"Smiley faces and fluoro flyers.",
+    dark:{h:[0,0],s:[0,0],l:[3,7]}, light:{h:[58,64],s:[95,100],l:[55,62]},
+    pool:[{h:[85,95],s:[95,100],l:[50,58]},{h:[320,330],s:[95,100],l:[55,62]},{h:[188,196],s:[95,100],l:[48,55]},{h:[22,28],s:[95,100],l:[50,55]},{h:[270,280],s:[80,95],l:[50,58]}],
+    heads:["Bungee","Rubik Glitch","Faster One","Tilt Warp","Russo One","Righteous"], bodies:["Space Mono","Archivo","Rajdhani","Exo 2"],
+    house:{name:"Second Summer",colors:["#0b0b0b","#f5f20a","#a4ff1c","#ff2db4","#00d0ff","#ff6a00","#f4f4f4"],head:"Bungee",body:"Space Mono"}},
 ];
 // themes grouped for the menu and the cabinet chart
 const CATS=[
   ["Eras",["victorian","midcentury","spaceage","sixties","seventies","eighties","nineties","y2k"]],
-  ["Movements",["artnouveau","deco","bauhaus","constructivism","destijl","swiss","popart","psychedelic","brutalist","punk"]],
+  ["Movements",["artnouveau","deco","bauhaus","constructivism","destijl","swiss","opart","popart","psychedelic","memphis","brutalist","punk"]],
   ["Styles",["modern","minimal","bold","luxury","editorial","tech","nordic","japandi","organic","tropical","kawaii"]],
-  ["Scenes",["grunge","vaporwave","cyberpunk","risograph","gothic","western"]],
+  ["Scenes",["acidrave","grunge","vaporwave","cyberpunk","risograph","gothic","western"]],
 ];
 {const ord=CATS.flatMap(([c,ids])=>ids.map(id=>[id,c]));
  ord.forEach(([id,c])=>{const t=THEMES.find(t=>t.id===id);if(t)t.cat=c;});

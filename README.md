@@ -1,6 +1,6 @@
 # The Great Brandomizer
 
-A 3D vintage fruit machine that spins up brand profiles. Pick one of 35 design themes, pull the handle, and the reels land on a colour palette and a Google Fonts headline and body pairing that suit the style, all checked for WCAG contrast. Hold the reels you like, spin again, and cash out a printed brand card.
+A 3D vintage fruit machine that spins up brand profiles. Pick one of 38 design themes, pull the handle, and the reels land on a colour palette and a Google Fonts headline and body pairing that suit the style, all checked for WCAG contrast. Hold the reels you like, spin again, and cash out a printed brand card.
 
 ### [▶ Play it in your browser](https://harrisongreener.github.io/TheGreatBrandomizer/)
 
@@ -10,12 +10,12 @@ Built with [three.js](https://threejs.org/). The machine is a single HTML page w
 
 ## How it works
 
-**Pick a theme.** Open the Themes menu, tap a row on the theme chart at the top of the machine, or press THEME to cycle. There are 35 themes in four groups, each with its own colour rules and font list:
+**Pick a theme.** Open the Themes menu, tap a row on the theme chart at the top of the machine, or press THEME to cycle. There are 38 themes in four groups, each with its own colour rules and font list:
 
 - **Eras:** Victorian, Mid-Century, Space Age, Sixties, Seventies, Eighties, Nineties, Y2K
-- **Movements:** Art Nouveau, Art Deco, Bauhaus, Constructivism, De Stijl, Swiss Style, Pop Art, Psychedelic, Brutalist, Punk Zine
+- **Movements:** Art Nouveau, Art Deco, Bauhaus, Constructivism, De Stijl, Swiss Style, Op Art, Pop Art, Psychedelic, Memphis, Brutalist, Punk Zine
 - **Styles:** Modern, Minimal, Bold, Luxury, Editorial, Tech, Nordic, Japandi, Organic, Tropical, Kawaii
-- **Scenes:** Grunge, Vaporwave, Cyberpunk, Risograph, Gothic, Western
+- **Scenes:** Acid Rave, Grunge, Vaporwave, Cyberpunk, Risograph, Gothic, Western
 
 **Pull the handle.** Click the handle, press START, drop an idea in the coin slot, or press Space. The colour reels and font reels spin as real drums and land one by one. Your brand name is spelled out across the headline reels in the font that lands.
 
